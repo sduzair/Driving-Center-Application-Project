@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include ('layouts/header'); -%>
+  <body>
+    <!-- Navigation-->
+    <%- include ('layouts/nav'); -%>
+    <!-- Page Header-->
+    <header class="masthead-home-background masthead">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-6 gx-lg-6 justify-content-center">
+          <div id="cards" class="row">
+            <div class="col-md-4 col-sm-12">
+              <div id="opaque-background" class="card text-white bg-primary mb-4">
+                <a href="driver/dashboard">
+                  <div id="height-auto" class="card-body">
+                    <h5 class="card-title">Driver Interface</h5>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div id="opaque-background" class="card text-white bg-primary mb-4">
+                <a href="#">
+                  <div id="height-auto" class="card-body">
+                    <h5 class="card-title">Examiner Interface</h5>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div id="opaque-background" class="card text-white bg-primary mb-4">
+                <a href="#">
+                  <div id="height-auto" class="card-body">
+                    <h5 class="card-title">Admin</h5>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <%- include ('layouts/footer.ejs'); -%> <%- include ('layouts/scripts.ejs'); -%>
+  </body>
+</html>

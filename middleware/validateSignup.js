@@ -1,0 +1,13 @@
+module.exports = (req, res, next) => {
+  if (req.body.username == "" || req.body.password == "" || req.body.userType == "") {
+    return res.render("signup", {
+      msg: "Please ensure that all required fields have a value",
+    })
+  }
+  if (req.body.passwordRepeat !== req.body.password) {
+    return res.render("signup", {
+      msg: "Please ensure that the passwords match",
+    })
+  }
+  next()
+}
