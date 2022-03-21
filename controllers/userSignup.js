@@ -14,4 +14,6 @@ module.exports = async function userSignup(req, res) {
       })
     } else console.log(err)
   })
+
+  // todo: create user entry in Driver collection
 }

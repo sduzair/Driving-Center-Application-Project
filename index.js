@@ -1,97 +1,110 @@
-const express = require("express")
-const path = require("path")
-const ejs = require("ejs")
+const express = require( "express" )
+const path = require( "path" )
+const ejs = require( "ejs" )
 //for database
-const mongoose = require("mongoose")
-const Driver = require("./models/Driver")
+const mongoose = require( "mongoose" )
+const Driver = require( "./models/Driver" )
 //for form multimedia data
-const fileUpload = require("express-fileupload")
+const fileUpload = require( "express-fileupload" )
 // for user session
-const expressSession = require("express-session")
+const expressSession = require( "express-session" )
 // for environment variables
-require("dotenv").config()
+require( "dotenv" ).config()
+
+const ONE_DAY = 1000 * 60 * 60 * 24
+const {
+  PORT = 4000,
+  NODE_ENV = 'development',
+  DB_USERNAME,
+  DB_PASSWORD,
+
+  SESS_NAME = 'sid',
+  SESSION_SECRET,
+  SESS_LIFETIME = ONE_DAY,
+} = process.env
+
+const IN_PROD = NODE_ENV === 'production'
 
 //middleware for validation
-const validateNewUserMiddleware = require("./middleware/validateNewUser")
-const validateExistingUserMiddleware = require("./middleware/validateExistingUser")
-const validateUserSignupMiddleware = require("./middleware/validateSignup")
-const validateUserLoginMiddleware = require("./middleware/validateLogin")
-const authenticationMiddleware = require("./middleware/authentication")
-const redirectIfAuthenticatedMiddleware = require("./middleware/redirectIfAuthenticated")
+const validateNewUser = require( "./middleware/validateNewUser" )
+const validateExistingUser = require( "./middleware/validateExistingUser" )
+const validateUserSignup = require( "./middleware/validateSignup" )
+const validateUserLogin = require( "./middleware/validateLogin" )
+const driverAuthentication = require( "./middleware/driverAuthentication" )
+const redirectIfAuthenticated = require( "./middleware/redirectIfAuthenticated" )
 
 //importing controllers
-const updateDriverController = require("./controllers/driverUpdate")
-const fetchDriverController = require("./controllers/driverFetch")
-const newDriverController = require("./controllers/driverNew")
-const homeController = require("./controllers/home")
-const dashboardController = require("./controllers/pageDashboard")
-const gPageController = require("./controllers/pageG")
-const g2PageController = require("./controllers/pageG2")
-const signupPageController = require("./controllers/pageSignup")
-const loginPageController = require("./controllers/pageLogin")
-const userSignupController = require("./controllers/userSignup")
-const userLoginController = require("./controllers/userLogin")
+const driverUpdate = require( "./controllers/driverUpdate" )
+const driverFetch = require( "./controllers/driverFetch" )
+const driverCreate = require( "./controllers/driverNew" )
+const pageHome = require( "./controllers/home" )
+const pageDriverDashboard = require( "./controllers/pageDashboard" )
+const pageG = require( "./controllers/pageG" )
+const pageG2 = require( "./controllers/pageG2" )
+const pageSignup = require( "./controllers/pageSignup" )
+const pageLogin = require( "./controllers/pageLogin" )
+const userSignup = require( "./controllers/userSignup" )
+const userLogin = require( "./controllers/userLogin" )
 
 const app = express()
-app.set("view engine", "ejs")
-app.use(express.static("public"))
+app.set( "view engine", "ejs" )
+app.use( express.static( "public" ) )
 //for form data from POST request
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(fileUpload())
-app.use("/driver/new-driver", validateNewUserMiddleware)
-app.use("/driver/update-driver", validateExistingUserMiddleware)
-app.use("/user/signup", validateUserSignupMiddleware)
-app.use("/user/login", validateUserLoginMiddleware)
-const oneDay = 1000 * 60 * 60 * 24
+app.use( express.json() )
+app.use( express.urlencoded( { extended: true } ) )
+app.use( fileUpload() )
+app.use( "/driver/new-driver", validateNewUser )
+app.use( "/driver/update-driver", validateExistingUser )
+app.use( "/user/signup", validateUserSignup )
+app.use( "/user/login", validateUserLogin )
+
 app.use(
-  expressSession({
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
-    cookie: { maxAge: oneDay },
+  expressSession( {
+    name: SESS_NAME,
     resave: false,
-  }),
+    saveUninitialized: false,
+    secret: SESSION_SECRET,
+    cookie: {
+      maxAge: SESS_LIFETIME,
+      sameSite: true,
+      secure: IN_PROD,
+    },
+  } ),
 )
 
 //mongodb database
-// todo: create environment variables for DB credentials
-mongoose.connect(
-  "mongodb+srv://" +
-    process.env.DB_USERNAME +
-    ":" +
-    process.env.DB_PASSWORD +
-    "@sandbox.tuank.mongodb.net/abc_driving_center",
+mongoose.connect( "mongodb+srv://" + DB_USERNAME + ":" + DB_PASSWORD + "@sandbox.tuank.mongodb.net/abc_driving_center",
   {
     useNewUrlParser: true,
-  },
+  }
 )
 
-//routing
-// authenticationMiddlewareprevents users not signed up from access
-app.post("/driver/update-driver", authenticationMiddleware, updateDriverController)
+// routing
+// driver authentication prevents any user other than 'Driver' from access
+app.post( "/driver/update-driver", driverAuthentication, driverUpdate )
 
-app.post("/driver/driver-details", authenticationMiddleware, fetchDriverController)
+app.post( "/driver/driver-details", driverAuthentication, driverFetch )
 
-app.post("/driver/new-driver", authenticationMiddleware, newDriverController)
+app.post( "/driver/new-driver", driverAuthentication, driverCreate )
 
-app.get("/", homeController)
+app.get( "/", pageHome )
 
-app.get("/index", homeController)
+app.get( "/index", pageHome )
 
-app.get("/driver/dashboard", authenticationMiddleware, dashboardController)
+app.get( "/driver/dashboard", driverAuthentication, pageDriverDashboard )
 
-app.get("/driver/g2_page", authenticationMiddleware, g2PageController)
+app.get( "/driver/g2_page", driverAuthentication, pageG2 )
 
-app.get("/driver/g_page", authenticationMiddleware, gPageController)
+app.get( "/driver/g_page", driverAuthentication, pageG )
 
-app.get("/signup", redirectIfAuthenticatedMiddleware, signupPageController)
+app.get( "/signup", redirectIfAuthenticated, pageSignup )
 
-app.get("/login", redirectIfAuthenticatedMiddleware, loginPageController)
+app.get( "/login", redirectIfAuthenticated, pageLogin )
 
-app.post("/user/signup", redirectIfAuthenticatedMiddleware, userSignupController)
+app.post( "/user/signup", redirectIfAuthenticated, userSignup )
 
-app.post("/user/login", redirectIfAuthenticatedMiddleware, userLoginController)
+app.post( "/user/login", redirectIfAuthenticated, userLogin )       
 
-app.listen(4000, () => {
-  console.log("Listening on port: 4000")
-})
+app.listen( PORT, () => {
+  console.log( "Listening on port: 4000" )
+} )
