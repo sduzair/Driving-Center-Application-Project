@@ -1,5 +1,4 @@
 // at the current stage only users of user type 'Driver' are able to login and access the driver dashboard
-// user id and type is assigned to the session - this data is saved on the users browser
 const User = require( "../models/User" )
 const bcrypt = require( "bcrypt" )
 
@@ -15,19 +14,19 @@ module.exports = function userLogin( req, res ) {
           req.session.userType = user.userType
           if( user.userType === "Driver" ) {
             res.redirect( "/driver/dashboard" )
-          } else if( user.userType === "Instructor" ) {
-            res.redirect( "/login" )
+          } else if( user.userType === "Examiner" ) {
+            res.render( "login", { msg: "Examiner user does not have access yet" } )
             // todo: redirect to first page the 'Instructor' user should see
           } else if( user.userType === "Admin" ) {
-            res.redirect( "/login" )
+            res.render( "login", { msg: "Admin user does not have access yet" } )
             // todo: redirect to first page the 'Admin' user should see
           }
         } else {
-          res.redirect( "/login" )
+          res.render( "login", { msg: "Incorrect Username/Password" } )
         }
       } )
     } else {
-      res.redirect( "/login" )
+      res.render( "login", { msg: "Incorrect Username/Password" } )
     }
   } )
 }

@@ -14,107 +14,221 @@
                 <h1>G2 Licence</h1>
                 <span class="subheading">New drivers can register for the G2 test.</span>
               </div>
-            </div>
+            </div> 
           </div>
         </div>
       </header>
       <!-- Main Content-->
-      <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-md-10 col-lg-8 col-xl-7">
-            <form class="row g-3" action="/driver/new-driver#personal" method="POST" enctype="multipart/form-data">
-              <!-- User details -->
-              <h2 id="personal">Personal</h2>
-              <div class="col-md-6">
-                <label for="firstName" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" />
-              </div>
-              <div class="col-md-6">
-                <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" />
-              </div>
-              <div class="col-md-6">
-                <label for="userID" class="form-label">User ID</label>
-                <input type="text" class="form-control" id="userID" name="userID" />
-              </div>
-              <div class="col-md-6">
-                <label for="inputDOB" class="form-label">Date of birth</label>
-                <input type="date" class="form-control" id="inputDOB" name="inputDOB" />
-              </div>
+      <% if(driver && msg==="Pls enter new driver details" ){ %>
+        <div class="container px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <form class="row g-3" action="/driver/new-driver#personal" method="POST" enctype="multipart/form-data">
+                <!-- User details -->
+                <h2 id="personal">Personal</h2>
+                <div class="col-md-6">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName" />
+                </div>
+                <div class="col-md-6">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName" />
+                </div>
+                <div class="col-md-6">
+                  <label for="userID" class="form-label">User ID</label>
+                  <input type="text" class="form-control" id="userID" name="userID" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputDOB" class="form-label">Date of birth</label>
+                  <input type="date" class="form-control" id="inputDOB" name="inputDOB" />
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- Address -->
+                <h2>Address</h2>
+                <div class="col-md-4">
+                  <label for="inputHouseNumber" class="form-label">House Number</label>
+                  <input type="number" class="form-control" id="inputHouseNumber" name="inputHouseNumber" />
+                </div>
+                <div class="col-md-8">
+                  <label for="inputStreet" class="form-label">Street</label>
+                  <input type="text" class="form-control" id="inputStreet" name="inputStreet" />
+                </div>
+                <div class="col-md-5">
+                  <label for="inputCity" class="form-label">City</label>
+                  <input type="text" class="form-control" id="inputCity" name="inputCity" />
+                </div>
+                <div class="col-md-4">
+                  <label for="inputProvince" class="form-label">Province</label>
+                  <input type="text" class="form-control" id="inputProvince" name="inputProvince" />
+                </div>
+                <div class="col-md-3">
+                  <label for="inputPostalCode" class="form-label">Postal Code</label>
+                  <input type="text" class="form-control" id="inputPostalCode" name="inputPostalCode" />
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- Car details -->
+                <h2>Car details</h2>
+                <div class="col-md-6">
+                  <label for="inputCarMake" class="form-label">Make</label>
+                  <input type="text" class="form-control" id="inputCarMake" name="inputCarMake" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCarModel" class="form-label">Model</label>
+                  <input type="text" class="form-control" id="inputCarModel" name="inputCarModel" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCarYear" class="form-label">Year</label>
+                  <input type="number" class="form-control" id="inputCarYear" name="inputCarYear" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCarPlatNumber" class="form-label">Plat Number</label>
+                  <input type="number" class="form-control" id="inputCarPlatNumber" name="inputCarPlatNumber" />
+                </div>
+                <div class="col-md-12">
+                  <label for="inputCarLicenceNumber" class="form-label">Licence Number</label>
+                  <input type="text" class="form-control" id="inputCarLicenceNumber"
+                    placeholder="Must be 8 characters (alphanumeric)" name="inputCarLicenceNumber" />
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- insert images -->
+                <div class="col-md-6">
+                  <label for="image1" class="form-label">Image 1</label>
+                  <input type="file" class="form-control" id="image1" name="image1" />
+                </div>
+                <div class="col-md-6">
+                  <label for="image2" class="form-label">Image 2</label>
+                  <input type="file" class="form-control" id="image2" name="image2" />
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
               <!-- Divider-->
               <hr class="my-4" />
-              <!-- Address -->
-              <h2>Address</h2>
-              <div class="col-md-4">
-                <label for="inputHouseNumber" class="form-label">House Number</label>
-                <input type="number" class="form-control" id="inputHouseNumber" name="inputHouseNumber" />
-              </div>
-              <div class="col-md-8">
-                <label for="inputStreet" class="form-label">Street</label>
-                <input type="text" class="form-control" id="inputStreet" name="inputStreet" />
-              </div>
-              <div class="col-md-5">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity" name="inputCity" />
-              </div>
-              <div class="col-md-4">
-                <label for="inputProvince" class="form-label">Province</label>
-                <input type="text" class="form-control" id="inputProvince" name="inputProvince" />
-              </div>
-              <div class="col-md-3">
-                <label for="inputPostalCode" class="form-label">Postal Code</label>
-                <input type="text" class="form-control" id="inputPostalCode" name="inputPostalCode" />
-              </div>
-              <!-- Divider-->
-              <hr class="my-4" />
-              <!-- Car details -->
-              <h2>Car details</h2>
-              <div class="col-md-6">
-                <label for="inputCarMake" class="form-label">Make</label>
-                <input type="text" class="form-control" id="inputCarMake" name="inputCarMake" />
-              </div>
-              <div class="col-md-6">
-                <label for="inputCarModel" class="form-label">Model</label>
-                <input type="text" class="form-control" id="inputCarModel" name="inputCarModel" />
-              </div>
-              <div class="col-md-6">
-                <label for="inputCarYear" class="form-label">Year</label>
-                <input type="number" class="form-control" id="inputCarYear" name="inputCarYear" />
-              </div>
-              <div class="col-md-6">
-                <label for="inputCarPlatNumber" class="form-label">Plat Number</label>
-                <input type="number" class="form-control" id="inputCarPlatNumber" name="inputCarPlatNumber" />
-              </div>
-              <div class="col-md-12">
-                <label for="inputCarLicenceNumber" class="form-label">Licence Number</label>
-                <input type="text" class="form-control" id="inputCarLicenceNumber"
-                  placeholder="Must be 8 characters (alphanumeric)" name="inputCarLicenceNumber" />
-              </div>
-              <!-- Divider-->
-              <hr class="my-4" />
-              <!-- insert images -->
-              <div class="col-md-6">
-                <label for="image1" class="form-label">Image 1</label>
-                <input type="file" class="form-control" id="image1" name="image1" />
-              </div>
-              <div class="col-md-6">
-                <label for="image2" class="form-label">Image 2</label>
-                <input type="file" class="form-control" id="image2" name="image2" />
-              </div>
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-            <!-- Divider-->
-            <hr class="my-4" />
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Alert if user not found - redirect from g_page -->
-      <% if(msg==="No such user exists!" ){ %>
+      <% } %>
+      <% if(driver && msg==="Driver found. You can update the details" ){ %>
+        <div class="container px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <form class="row g-3" action="/driver/update-driver#province" method="POST">
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- User details -->
+                <h2 id="personal">Personal</h2>
+                <div class="col-md-6">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName" readonly
+                    value="<%= driver.firstName%>"></input>
+                </div>
+                <div class="col-md-6">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName" readonly
+                    value="<%= driver.lastName%>" />
+                </div>
+                <div class="col-md-6">
+                  <label for="userID" class="form-label">User ID</label>
+                  <input type="text" class="form-control" id="userID" name="userID" readonly
+                    value="<%= driver.userID%>" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputDOB" class="form-label">Date of birth</label>
+                  <input type="date" class="form-control" id="inputDOB" name="inputDOB" readonly
+                    value="<%= driver.DOB %>" />
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- Address -->
+                <h2>Address</h2>
+                <div class="col-md-4">
+                  <label for="inputHouseNumber" class="form-label">House Number</label>
+                  <input type="number" class="form-control" id="inputHouseNumber" name="inputHouseNumber"
+                    value="<%= driver.address.houseNumber %>" />
+                </div>
+                <div class="col-md-8">
+                  <label for="inputStreet" class="form-label">Street</label>
+                  <input type="text" class="form-control" id="inputStreet" name="inputStreet"
+                    value="<%= driver.address.street%>" />
+                </div>
+                <div class="col-md-5">
+                  <label for="inputCity" class="form-label">City</label>
+                  <input type="text" class="form-control" id="inputCity" name="inputCity"
+                    value="<%= driver.address.city%>" />
+                </div>
+                <div class="col-md-4">
+                  <label for="inputProvince" class="form-label">Province</label>
+                  <input type="text" class="form-control" id="inputProvince" name="inputProvince"
+                    value="<%= driver.address.province%>" />
+                </div>
+                <div class="col-md-3">
+                  <label for="inputPostalCode" class="form-label">Postal Code</label>
+                  <input type="text" class="form-control" id="inputPostalCode" name="inputPostalCode"
+                    value="<%= driver.address.postalCode %>" />
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- Car details -->
+                <h2>Car details</h2>
+                <div class="col-md-6">
+                  <label for="inputCarMake" class="form-label">Make</label>
+                  <input type="text" class="form-control" id="inputCarMake" name="inputCarMake"
+                    value="<%= driver.carMake %>" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCarModel" class="form-label">Model</label>
+                  <input type="text" class="form-control" id="inputCarModel" name="inputCarModel"
+                    value="<%= driver.carModel %>" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCarYear" class="form-label">Year</label>
+                  <input type="number" class="form-control" id="inputCarYear" name="inputCarYear"
+                    value="<%= driver.carYear %>" />
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCarPlatNumber" class="form-label">Plat Number</label>
+                  <input type="number" class="form-control" id="inputCarPlatNumber" name="inputCarPlatNumber"
+                    value="<%= driver.carPlatNumber %>" />
+                </div>
+                <div class="col-md-12">
+                  <label for="inputCarLicenceNumber" class="form-label">Licence Number</label>
+                  <input type="text" class="form-control" id="inputCarLicenceNumber"
+                    placeholder="Must be 8 characters (alphanumeric)" name="inputCarLicenceNumber"
+                    value="<%= driver.carLicenceNumber %>" readonly />
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary" id="btnUpdate" disabled>Update</button>
+                </div>
+              </form>
+              <!-- Divider-->
+              <hr class="my-4" />
+            </div>
+          </div>
+        </div>
+      <% } %>
+      <!-- Alert if driver not found -->
+      <% if(msg==="No such driver exists!" ){ %>
         <div class="custom-alert-red">
           <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>Invalid:</strong> No such user found! New users can register for G2 only.
+          <strong>Server:</strong> No such driver exists!
+        </div>
+      <% } %>
+      <!-- Alert if driver to be created -->
+      <% if(msg==="Pls enter new driver details"){ %>
+        <div class="custom-alert-green">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>Server:</strong> Pls enter new driver details
+        </div>
+      <% } %>
+      <!-- Alert if driver found -->
+      <% if(msg==="Driver found. You can update the details"){ %>
+        <div class="custom-alert-green">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>Server:</strong> Driver found. You can update the details
         </div>
       <% } %>
       <!-- Form sever validation -->
@@ -124,15 +238,9 @@
           <strong>Server:</strong> Please ensure that all the fields have a value.
         </div> 
       <% } %>
-      <!-- User successful login -->
-      <% if(msg==="Login successfull!" ){ %>
-        <div class="custom-alert-green">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>Server:</strong> Login successfull!
-        </div>
-      <% } %>
       <%- include ('layouts/footer.ejs'); -%>
       <%- include ('layouts/scripts.ejs'); -%>
+      <script src="/js/activate-btn.js"></script>
   </body>
 
 </html>

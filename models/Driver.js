@@ -1,31 +1,71 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
-
+// todo: set required fields
 const DriverSchema = new mongoose.Schema({
-  firstName: String,
+  firstName: {
+    required: true,
+    type: String,
+  },
   lastName: String,
   userID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  DOB: {
+    required: true,
     type: String,
-    unique: true,
   },
-  DOB: String,
   address: {
-    houseNumber: Number,
-    street: String,
-    city: String,
-    province: String,
-    postalCode: String,
+    houseNumber: {
+      required: true,
+      type: Number,
+    },
+    street: {
+      required: true,
+      type: String,
+    },
+    city: {
+      required: true,
+      type: String,
+    },
+    province: {
+      required: true,
+      type: String,
+    },
+    postalCode: {
+      required: true,
+      type: String,
+    },
+
   },
-  carMake: String,
-  carModel: String,
-  carYear: Number,
-  carPlatNumber: Number,
+  carMake: {
+    required: true,
+    type: String,
+  },
+  carModel: {
+    required: true,
+    type: String,
+  },
+  carYear: {
+    required: true,
+    type: Number,
+  },
+  carPlatNumber: {
+    required: true,
+    type: Number,
+  },
   carLicenceNumber: {
     type: String,
-    unique: true,
+    required: true,
   },
-  image1: String,
-  image2: String,
+  image1: {
+    required: true,
+    type: String,
+  },
+  image2: {
+    required: true,
+    type: String,
+  },
 })
 
 DriverSchema.pre("save", function (next) {

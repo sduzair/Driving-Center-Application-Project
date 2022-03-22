@@ -78,6 +78,27 @@
         <strong>Server:</strong> Please ensure that all required fields have a value
       </div>
       <% } %>
+      <!-- Instructor user does not have access yet -->
+      <% if(msg==="Examiner user does not have access yet" ){ %>
+      <div class="custom-alert-yellow">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Server:</strong> Instructor user does not have access yet
+      </div>
+      <% } %>
+      <!-- Admin user does not have access yet -->
+      <% if(msg==="Admin user does not have access yet" ){ %>
+      <div class="custom-alert-yellow">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Server:</strong> Admin user does not have access yet
+      </div>
+      <% } %>
+      <!-- Incorrect Username/Password -->
+      <% if(msg==="Incorrect Username/Password" ){ %>
+      <div class="custom-alert-red">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Server:</strong> Incorrect Username/Password
+      </div>
+      <% } %>
       <%- include ('layouts/footer.ejs'); -%> 
       <%- include ('layouts/scripts.ejs'); -%> 
   </body>

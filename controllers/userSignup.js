@@ -1,4 +1,6 @@
 const User = require("../models/User")
+const Driver = require( "../models/Driver" )
+const mongoose = require( "mongoose" )  
 
 module.exports = async function userSignup(req, res) {
   const userObj = {}
@@ -6,14 +8,46 @@ module.exports = async function userSignup(req, res) {
   userObj.password = req.body.password
   userObj.userType = req.body.userType
 
-  // creating document in db
-  User.create(userObj, (err, user) => {
-    if (!err) {
-      res.render("login", {
-        msg: "Signup successfull! Login to continue.",
-      })
-    } else console.log(err)
-  })
+  if( req.body.userType === 'Driver' ) {
+    console.log( "user is a Driver" )
 
-  // todo: create user entry in Driver collection
+    const defaultDriver = new Driver()
+
+    defaultDriver.firstName = "_defaultfirstname"
+    defaultDriver.lastName = "_defaultlastname"
+    defaultDriver.DOB = "_defaultdob"
+    defaultDriver.address.houseNumber = 00
+    defaultDriver.address.street = "_defaultstreet"
+    defaultDriver.address.city = "_defaultcity"
+    defaultDriver.address.province = "_defaultinputProvince"
+    defaultDriver.address.postalCode = "_defaultinputPostalCode"
+    defaultDriver.carMake = "_defaultinputCarMake"
+    defaultDriver.carModel = "_defaultinputCarModel"
+    defaultDriver.carYear = 0000
+    defaultDriver.carPlatNumber = 00000000000
+    defaultDriver.carLicenceNumber = "_defaultinputCarLicenceNumber"
+    defaultDriver.image1 = "/img/_default"
+    defaultDriver.image2 = "/img/_default"
+
+    // creating document in 'User' Collection
+    User.create( userObj, ( err, user ) => {
+      if( !err ) {
+        // creating document in 'Driver' collection
+        defaultDriver.userID = user._id
+        Driver.create( defaultDriver, ( err, driver ) => {
+          if( !err ) {
+            res.redirect( "/login" )
+          } else console.log( err )
+        } )
+      } else console.log( err )
+    } )
+  } else {
+    // creating document in 'User' Collection for user types other than 'Driver'
+    User.create( userObj, ( err, user ) => {
+      if( !err ) {
+        res.redirect( "/login" )
+      } else console.log( err )
+    } )
+  }
+
 }

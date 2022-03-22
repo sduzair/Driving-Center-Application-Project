@@ -17,5 +17,5 @@ module.exports = async function updateDriverDetails(req, res) {
   await Driver.findOneAndUpdate({ userID: req.body.userID }, update, {
     new: true,
   })
-  res.render("driver/dashboard", { msg: "Driver details were updated." })
+  res.redirect( "/driver/dashboard" )
 }
