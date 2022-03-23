@@ -1,64 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include ('layouts/header'); -%>
+<%- include ('../layouts/header'); -%>
 
-  <body>
-    <!-- Navigation-->
-    <%- include ('layouts/nav'); -%>
-      <!-- Page Header-->
-      <header class="masthead-driver-background masthead">
-        <div class="container position-relative px-8 px-lg-8">
-          <div class="row gx-6 gx-lg-8 justify-content-center">
-            <div class="col-md-10 col-lg-10 col-xl-10">
-              <div class="site-heading">
-                <h1>Welcome to Driver Dashboard</h1>
-                <span class="subheading">Register for a test</span>
-              </div>
-            </div>
+<body>
+  <!-- Navigation-->
+  <%- include ('../layouts/nav'); -%>
+  <!-- Page Header-->
+  <header class="masthead-driver-background masthead">
+    <div class="container position-relative px-8 px-lg-8">
+      <div class="row gx-6 gx-lg-8 justify-content-center">
+        <div class="col-md-10 col-lg-10 col-xl-10">
+          <div class="site-heading">
+            <h1>Welcome to Driver Dashboard</h1>
+            <span class="subheading">Register for a test</span>
           </div>
         </div>
-      </header>
-      <!-- Main Content-->
-      <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-          <div class="col-md-10 col-lg-8 col-xl-7">
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-              <a href="/driver/g2_page">
-                <h2 class="post-title">
-                  G2 Licence
-                </h2>
-              </a>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-              <a href="/driver/g_page">
-                <h2 class="post-title">
-                  G Licence
-                </h2>
-              </a>
-            </div>
-          </div>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content-->
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <!-- Divider-->
+        <hr class="my-4" />
+        <!-- Post preview-->
+        <div class="post-preview">
+          <a href="/driver/g2_page">
+            <h2 class="post-title">
+              G2 Licence
+            </h2>
+          </a>
         </div>
-        <!-- Alert on new user creation -->
-        <% if(msg === "New driver created."){ %>
+        <!-- Divider-->
+        <hr class="my-4" />
+        <!-- Post preview-->
+        <div class="post-preview">
+          <a href="/driver/g_page">
+            <h2 class="post-title">
+              G Licence
+            </h2>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Alert on new user creation -->
+    <!--  if(msg === "New driver created."){ %>
     <div class="custom-alert-green">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <span class="closebtn"
+        onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Valid entries:</strong> New driver created.
     </div>
-    <% } %>
+     } %> -->
     <!-- Alert on user details update -->
-    <% if(msg === "Driver details were updated."){ %>
+    <!--  if(msg === "Driver details were updated."){ %>
     <div class="custom-alert-green">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <span class="closebtn"
+        onclick="this.parentElement.style.display='none';">&times;</span>
       <strong>Valid entries:</strong> Driver details were updated.
     </div>
-    <% } %>
-    <%- include ('layouts/footer.ejs'); -%> 
-    <%- include ('layouts/scripts.ejs'); -%>
-  </body>
+     } %> -->
+    <div class="custom-alerts">
+      <!-- Validation Errors -->
+      <% if( errors != null && errors.length > 0 ) { %>
+      <% for( var i = 0; i < errors.length; i++ ) { %>
+      <div class="custom-alert-red">
+        <span class="closebtn"
+          onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Server:</strong> <%= errors[i] %>
+      </div>
+      <% } %>
+      <% } %>
+      <!-- Server Messages -->
+      <% if( serverMsgs != null && serverMsgs.length > 0 ) { %>
+      <% for( var i = 0; i < serverMsgs.length; i++ ) { %>
+      <div class="custom-alert-yellow">
+        <span class="closebtn"
+          onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Server:</strong> <%= serverMsgs[i] %>
+      </div>
+      <% } %>
+      <% } %>
+    </div>
+    <%- include ('../layouts/footer.ejs'); -%>
+    <%- include ('../layouts/scripts.ejs'); -%>
+</body>
+
 </html>

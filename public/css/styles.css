@@ -58,47 +58,7 @@ nav#mainNav {
   margin-bottom: 3rem;
 }
 
-.custom-alert-red {
-  position: fixed;
-  padding: 0.1rem 0.5rem;
-  bottom: 0;
-  right: 0;
-  background-color: #f44336;
-  color: white;
-}
 
-.custom-alert-green {
-  position: fixed;
-  padding: 0.1rem 0.5rem;
-  bottom: 0;
-  right: 0;
-  background-color: #1ab91a;
-  color: white;
-}
-
-.custom-alert-yellow {
-  position: fixed;
-  padding: 0.1rem 0.5rem;
-  bottom: 0;
-  right: 0;
-  background-color: #fcf940;
-  color: rgb(0, 0, 0);
-}
-
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.closebtn:hover {
-  color: black;
-}
 
 /*!
 * Start Bootstrap - Clean Blog v6.0.7 (https://startbootstrap.com/theme/clean-blog)
@@ -11718,4 +11678,61 @@ button.btn.btn-primary {
 
 #cards a:hover {
   background: aliceblue;
+}
+
+/* nav highlight active */
+.active {
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.masthead-pagenotfound {
+    background-image: url("/assets/img/error-g953cd1874_1920.jpg");
+    height: 80vh;
+    width: auto;
+    background-repeat: round;
+    margin-bottom: 3rem;
+}
+
+/* for error messages */
+
+.custom-alerts {
+  position: fixed;  
+  bottom: 0;
+  right: 0;
+}
+
+.custom-alert-red {
+  margin-top: 10px;
+  padding: 0.1rem 0.5rem;
+  background-color: #f44336;
+  color: white;
+}
+
+.custom-alert-green {
+  margin-top: 10px;
+  padding: 0.1rem 0.5rem;
+  background-color: #1ab91a;
+  color: white;
+}
+
+.custom-alert-yellow {
+  margin-top: 10px;
+  padding: 0.1rem 0.5rem;
+  background-color: #fcf940;
+  color: rgb(0, 0, 0);
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }

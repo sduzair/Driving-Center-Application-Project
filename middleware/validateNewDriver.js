@@ -1,5 +1,5 @@
-module.exports = (req, res, next) => {
-  if (
+module.exports = ( req, res, next ) => {
+  if(
     req.files == null ||
     req.body.firstName == null ||
     req.body.lastName == null ||
@@ -16,9 +16,11 @@ module.exports = (req, res, next) => {
     req.body.inputCarPlatNumber == null ||
     req.body.inputCarLicenceNumber == null
   ) {
-    return res.render("driver/g2_page", {
-      msg: "Please ensure that all the fields have a value",
-    })
+    return res.render( "driver/g2_page", {
+      driver: null,
+      serverMsgs: [ "Please ensure that all the fields have a value" ],
+      errors: req.flush( 'validationErrors' )
+    } )
   }
   next()
 }

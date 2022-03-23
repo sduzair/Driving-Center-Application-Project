@@ -1,15 +1,14 @@
-const User = require("../models/User")
+const User = require( "../models/User" )
 const Driver = require( "../models/Driver" )
-const mongoose = require( "mongoose" )  
+const mongoose = require( "mongoose" )
 
-module.exports = async function userSignup(req, res) {
+module.exports = async function userSignup( req, res ) {
   const userObj = {}
   userObj.username = req.body.username
   userObj.password = req.body.password
   userObj.userType = req.body.userType
 
   if( req.body.userType === 'Driver' ) {
-    console.log( "user is a Driver" )
 
     const defaultDriver = new Driver()
 
@@ -31,22 +30,39 @@ module.exports = async function userSignup(req, res) {
 
     // creating document in 'User' Collection
     User.create( userObj, ( err, user ) => {
-      if( !err ) {
+      if( err == null ) {
         // creating document in 'Driver' collection
         defaultDriver.userID = user._id
         Driver.create( defaultDriver, ( err, driver ) => {
           if( !err ) {
+            req.flash( 'serverMsgs', [ "Signup successful." ] )
             res.redirect( "/login" )
-          } else console.log( err )
+          } else {
+            req.flash( 'validationErrors', err.errors
+              ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
+              : [ "Unable to create driver user" ] )
+            res.redirect( "/signup" )
+          }
         } )
-      } else console.log( err )
+      } else {
+        req.flash( 'validationErrors', err.errors
+          ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
+          : [ "User exists please sign-in" ] )
+        res.redirect( "/login" )
+      }
     } )
   } else {
     // creating document in 'User' Collection for user types other than 'Driver'
     User.create( userObj, ( err, user ) => {
       if( !err ) {
+        req.flash( 'serverMsgs', [ "Signup successful. But access is limited to Driver user" ] )
         res.redirect( "/login" )
-      } else console.log( err )
+      } else {
+        req.flash( 'validationErrors', err.errors
+          ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
+          : [ "Unable to create user" ] )
+        res.redirect( "/signup" )
+      }
     } )
   }
 

@@ -7,22 +7,28 @@ module.exports = async function readDriverDetails( req, res ) {
     if( error || !driver ) {
       res.status( 401 ).render( "driver/g2_page", {
         driver: null,
-        msg: "No such driver exists!",
+        errors: error.errors
+          ? Object.keys( error.errors ).map( key => error.errors[ key ].message )
+          : [ "Error finding driver!" ],
+        serverMsgs: null
       } )
     } else {
       bcrypt.compare( "_defaultinputCarLicenceNumber", driverObj.carLicenceNumber, ( err, same ) => {
         if( same ) {
           return res.render( "driver/g2_page", {
-            driver: true,
-            msg: "Pls enter new driver details"
+            driver: false,
+            errors: req.flash( 'validationErrors' ),
+            serverMsgs: [ "Pls enter new driver details" ]
           } )
         } else {
           return res.render( "driver/g2_page", {
             driver: driverObj,
-            msg: "Driver found. You can update the details",
+            errors: req.flash( 'validationErrors' ),
+            serverMsgs: [ "Driver found. You can update the details" ]
           } )
         }
       } )
     }
   } )
 }
+

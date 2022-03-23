@@ -1,6 +1,5 @@
 const Driver = require( "../models/Driver" )
 const bcrypt = require( "bcrypt" )
-const { redirect } = require( "express/lib/response" )
 
 module.exports = async function readDriverDetails( req, res ) {
   Driver.find( { userID: req.session.userId }, ( error, driver ) => {
@@ -8,16 +7,21 @@ module.exports = async function readDriverDetails( req, res ) {
     if( error || !driver ) {
       res.status( 401 ).render( "driver/g_page", {
         driver: null,
-        msg: "No such driver exists!",
+        errors: error.errors
+          ? Object.keys( error.errors ).map( key => error.errors[ key ].message )
+          : [ "Error finding driver!" ],
+        serverMsgs: null
       } )
     } else {
       bcrypt.compare( "_defaultinputCarLicenceNumber", driverObj.carLicenceNumber, ( err, same ) => {
         if( same ) {
+          req.flash( 'validationErrors', [ 'First enter new driver details' ] )
           return res.redirect( "/driver/g2_page" )
         } else {
           return res.render( "driver/g_page", {
             driver: driverObj,
-            msg: "Driver found.",
+            errors: req.flash( 'validationErrors' ),
+            serverMsgs: [ "Driver found." ],
           } )
         }
       } )

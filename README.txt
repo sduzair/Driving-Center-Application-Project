@@ -8,8 +8,8 @@ Validation Checks (other than Mongoose User Model):
     - Unique username required
     - All fields are required 
   - Login
+    - If user does not exist user is asked to signup
     - All fields are required
-    - User exists
   - New Driver Form
     - All fields are required
   - Existing Driver form

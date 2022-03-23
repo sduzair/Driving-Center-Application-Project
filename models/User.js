@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
-const bcrypt = require("bcrypt")
+const mongoose = require( "mongoose" )
+const bcrypt = require( "bcrypt" )
+const uniqueValidator = require( 'mongoose-unique-validator' )
 
 const UserSchema = new mongoose.Schema(
   {
@@ -15,7 +16,7 @@ const UserSchema = new mongoose.Schema(
     userType: {
       type: String,
       enum: {
-        values: ["Driver", "Examiner", "Admin"],
+        values: [ "Driver", "Examiner", "Admin" ],
       },
       required: true,
     },
@@ -25,20 +26,22 @@ const UserSchema = new mongoose.Schema(
   },
 )
 
-UserSchema.pre("save", function (next) {
+UserSchema.plugin( uniqueValidator )
+
+UserSchema.pre( "save", function( next ) {
   const user = this
 
-  bcrypt.hash(user.password, 10, (error, hash) => {
+  bcrypt.hash( user.password, 10, ( error, hash ) => {
     user.password = hash
     next()
-  })
+  } )
 
   // bcrypt.hash(driver.DOB, 10, (error, hash) => {
   // 	driver.DOB = hash
   // 	next()
   // })
-})
+} )
 
-const User = mongoose.model("User", UserSchema)
+const User = mongoose.model( "User", UserSchema )
 
 module.exports = User
