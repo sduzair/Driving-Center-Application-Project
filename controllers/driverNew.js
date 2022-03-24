@@ -31,7 +31,14 @@ module.exports = async function createDriverDetails( req, res ) {
     new: true,
   }, ( err, driver ) => {
     if( !err ) {
+      req.flash( 'serverMsgs', [ "New driver created" ] )
       res.redirect( "/driver/dashboard" )
-    } else console.log( err )
+    } else {
+      req.flash( 'validationErrors', err.errors
+        ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
+        : [ "Unable to create new driver" ] )
+      req.flash( 'data', req.body )
+      res.redirect( '/driver/g2_page' )
+    }
   } )
 }

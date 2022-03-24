@@ -10,10 +10,18 @@ module.exports = ( req, res, next ) => {
     req.body.inputCarYear == "" ||
     req.body.inputCarPlatNumber == ""
   ) {
+    // req.flash( 'validationErrors', [ "Please ensure all fields have a value" ] )
+    // req.flash( 'date', req.body )
+    // return res.redirect( '/driver/g2_page' )
     return res.render( "driver/g2_page", {
-      driver: null,
-      serverMsgs: [ "Please ensure that all the fields have a value" ],
-      errors: req.flush( 'validationErrors' ),
+      driver: {
+        ...req.body,
+        DOB: req.body.inputDOB,
+        carLicenceNumber: req.body.inputCarLicenceNumber,
+      },
+      errors: [ "Please ensure all fields have a value" ],
+      serverMsgs: null,
+      data: req.body,
     } )
   }
   next()

@@ -71,7 +71,7 @@ app.use(
 app.use( flash() )
 
 app.use( "/driver/new-driver", validateNewDriver )
-app.use( "/driver/update-driver", validateExistingDriver )
+// app.use( "/driver/update-driver", validateExistingDriver )
 app.use( "/user/signup", validateUserSignup )
 app.use( "/user/login", validateUserLogin )
 
@@ -93,7 +93,7 @@ mongoose.connect( "mongodb+srv://" + DB_USERNAME + ":" + DB_PASSWORD + "@sandbox
 // driver authentication prevents any user other than 'Driver' from access
 app.post( "/driver/update-driver", driverAuthentication, driverUpdate )
 
-app.post( "/driver/driver-details", driverAuthentication, driverFetch )
+// app.post( "/driver/driver-details", driverAuthentication, driverFetch )
 
 app.post( "/driver/new-driver", driverAuthentication, driverNew )
 

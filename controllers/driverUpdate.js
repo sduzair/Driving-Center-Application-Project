@@ -1,6 +1,6 @@
-const Driver = require("../models/Driver")
+const Driver = require( "../models/Driver" )
 
-module.exports = async function updateDriverDetails(req, res) {
+module.exports = async function updateDriverDetails( req, res ) {
   const update = {
     address: {
       houseNumber: req.body.inputHouseNumber,
@@ -14,8 +14,20 @@ module.exports = async function updateDriverDetails(req, res) {
     carYear: req.body.inputCarYear,
     carPlatNumber: req.body.inputCarPlatNumber,
   }
-  await Driver.findOneAndUpdate({ userID: req.body.userID }, update, {
+  Driver.findOneAndUpdate( { userID: req.body.userID }, update, {
     new: true,
-  })
-  res.redirect( "/driver/dashboard" )
+  }, ( err ) => {
+    if( err ) {
+      req.flash( 'validationErrors', err.errors
+        ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
+        : [ "Unable to update driver details" ] )
+      req.flash( 'data', req.body )
+      res.redirect( '/driver/g2_page' )
+    }
+    else {
+      req.flash( 'serverMsgs', [ 'Update successful' ] )
+      res.redirect( "/driver/dashboard" )
+    }
+  } )
+
 }

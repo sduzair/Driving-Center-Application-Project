@@ -41,7 +41,8 @@
                       id="input-username"
                       class="form-control form-control-lg"
                       placeholder="Enter a username"
-                      name="username" />
+                      name="username"
+                      value="<%- data ? data.username : "" %>" />
                     <label class="form-label"
                       for="input-username">Username</label>
                   </div>
@@ -52,7 +53,8 @@
                       id="input-password"
                       class="form-control form-control-lg"
                       placeholder="Enter password"
-                      name="password" />
+                      name="password"
+                      value="<%- data ? data.password : "" %>" />
                     <label class="form-label"
                       for="input-password">Password</label>
                   </div>
@@ -63,7 +65,8 @@
                       id="input-password-repeat"
                       class="form-control form-control-lg"
                       placeholder="Repeat password"
-                      name="passwordRepeat" />
+                      name="passwordRepeat"
+                      value="<%- data ? data.password : "" %>" />
                     <label class="form-label"
                       for="input-password-repeat">Re-enter Password</label>
                   </div>
@@ -74,9 +77,18 @@
                       class="form-select form-select-lg mb-3"
                       aria-label="User type select"
                       name="userType">
-                      <option value="Driver">Driver</option>
-                      <option value="Examiner">Examiner</option>
-                      <option value="Admin">Admin</option>
+                      <option value="Driver"
+                        <% if (data) if ( data.userType === 'Driver' )  { %>
+                        selected
+                        <% } %>>Driver</option>
+                      <option value="Examiner"
+                        <% if (data) if ( data.userType === 'Examiner' )  { %>
+                        selected
+                        <% } %>>Examiner</option>
+                      <option value="Admin"
+                        <% if (data) if ( data.userType === 'Admin' ) { %>
+                        selected
+                        <% } %>>Admin</option>
                     </select>
                     <label class="form-label"
                       for="selectUserType">Select User Type</label>

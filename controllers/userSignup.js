@@ -41,14 +41,16 @@ module.exports = async function userSignup( req, res ) {
             req.flash( 'validationErrors', err.errors
               ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
               : [ "Unable to create driver user" ] )
+            req.flash( 'data', req.body )
             res.redirect( "/signup" )
           }
         } )
       } else {
         req.flash( 'validationErrors', err.errors
           ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
-          : [ "User exists please sign-in" ] )
-        res.redirect( "/login" )
+          : [ "Error creating user" ] )
+        req.flash( 'data', req.body )
+        res.redirect( "/signup" )
       }
     } )
   } else {
@@ -61,6 +63,8 @@ module.exports = async function userSignup( req, res ) {
         req.flash( 'validationErrors', err.errors
           ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
           : [ "Unable to create user" ] )
+
+        req.flash( 'data', req.body )
         res.redirect( "/signup" )
       }
     } )

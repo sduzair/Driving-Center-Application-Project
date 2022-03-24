@@ -35,7 +35,8 @@
             <input type="text"
               class="form-control"
               id="firstName"
-              name="firstName" />
+              name="firstName"
+              value="<%- data ? data.firstName : "" %>" />
           </div>
           <div class="col-md-6">
             <label for="lastName"
@@ -43,23 +44,26 @@
             <input type="text"
               class="form-control"
               id="lastName"
-              name="lastName" />
+              name="lastName"
+              value="<%- data ? data.lastName : "" %>" />
           </div>
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="userID"
               class="form-label">User ID</label>
             <input type="text"
               class="form-control"
               id="userID"
-              name="userID" />
-          </div>
+              name="userID"
+              value=" data ? data.userID : "" " />
+          </div> -->
           <div class="col-md-6">
             <label for="inputDOB"
               class="form-label">Date of birth</label>
             <input type="date"
               class="form-control"
               id="inputDOB"
-              name="inputDOB" />
+              name="inputDOB"
+              value="<%- data ? data.inputDOB : "" %>" />
           </div>
           <!-- Divider-->
           <hr class="my-4" />
@@ -71,7 +75,8 @@
             <input type="number"
               class="form-control"
               id="inputHouseNumber"
-              name="inputHouseNumber" />
+              name="inputHouseNumber"
+              value="<%- data ? data.inputHouseNumber : "" %>" />
           </div>
           <div class="col-md-8">
             <label for="inputStreet"
@@ -79,7 +84,8 @@
             <input type="text"
               class="form-control"
               id="inputStreet"
-              name="inputStreet" />
+              name="inputStreet"
+              value="<%- data ? data.inputStreet : "" %>" />
           </div>
           <div class="col-md-5">
             <label for="inputCity"
@@ -87,7 +93,8 @@
             <input type="text"
               class="form-control"
               id="inputCity"
-              name="inputCity" />
+              name="inputCity"
+              value="<%- data ? data.inputCity : "" %>" />
           </div>
           <div class="col-md-4">
             <label for="inputProvince"
@@ -95,7 +102,8 @@
             <input type="text"
               class="form-control"
               id="inputProvince"
-              name="inputProvince" />
+              name="inputProvince"
+              value="<%- data ? data.inputProvince : "" %>" />
           </div>
           <div class="col-md-3">
             <label for="inputPostalCode"
@@ -103,7 +111,8 @@
             <input type="text"
               class="form-control"
               id="inputPostalCode"
-              name="inputPostalCode" />
+              name="inputPostalCode"
+              value="<%- data ? data.inputPostalCode : "" %>" />
           </div>
           <!-- Divider-->
           <hr class="my-4" />
@@ -115,7 +124,8 @@
             <input type="text"
               class="form-control"
               id="inputCarMake"
-              name="inputCarMake" />
+              name="inputCarMake"
+              value="<%- data ? data.inputCarMake : "" %>" />
           </div>
           <div class="col-md-6">
             <label for="inputCarModel"
@@ -123,7 +133,8 @@
             <input type="text"
               class="form-control"
               id="inputCarModel"
-              name="inputCarModel" />
+              name="inputCarModel"
+              value="<%- data ? data.inputCarModel : "" %>" />
           </div>
           <div class="col-md-6">
             <label for="inputCarYear"
@@ -131,7 +142,8 @@
             <input type="number"
               class="form-control"
               id="inputCarYear"
-              name="inputCarYear" />
+              name="inputCarYear"
+              value="<%- data ? data.inputCarYear : "" %>" />
           </div>
           <div class="col-md-6">
             <label for="inputCarPlatNumber"
@@ -139,7 +151,8 @@
             <input type="number"
               class="form-control"
               id="inputCarPlatNumber"
-              name="inputCarPlatNumber" />
+              name="inputCarPlatNumber"
+              value="<%- data ? data.inputCarPlatNumber : "" %>" />
           </div>
           <div class="col-md-12">
             <label for="inputCarLicenceNumber"
@@ -148,7 +161,8 @@
               class="form-control"
               id="inputCarLicenceNumber"
               placeholder="Must be 8 characters (alphanumeric)"
-              name="inputCarLicenceNumber" />
+              name="inputCarLicenceNumber"
+              value="<%- data ? data.inputCarLicenceNumber : "" %>" />
           </div>
           <!-- Divider-->
           <hr class="my-4" />
@@ -185,7 +199,7 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
         <form class="row g-3"
-          action="/driver/update-driver#province"
+          action="/driver/update-driver#personal"
           method="POST">
           <!-- Divider-->
           <hr class="my-4" />
@@ -242,7 +256,7 @@
               class="form-control"
               id="inputHouseNumber"
               name="inputHouseNumber"
-              value="<%= driver.address.houseNumber %>" />
+              value="<%= data ? data.inputHouseNumber : driver.address.houseNumber %>" />
           </div>
           <div class="col-md-8">
             <label for="inputStreet"
@@ -251,7 +265,7 @@
               class="form-control"
               id="inputStreet"
               name="inputStreet"
-              value="<%= driver.address.street%>" />
+              value="<%= data ? data.inputStreet : driver.address.street%>" />
           </div>
           <div class="col-md-5">
             <label for="inputCity"
@@ -260,7 +274,7 @@
               class="form-control"
               id="inputCity"
               name="inputCity"
-              value="<%= driver.address.city%>" />
+              value="<%= data ? data.inputCity : driver.address.city%>" />
           </div>
           <div class="col-md-4">
             <label for="inputProvince"
@@ -269,7 +283,7 @@
               class="form-control"
               id="inputProvince"
               name="inputProvince"
-              value="<%= driver.address.province%>" />
+              value="<%= data ? data.inputProvince : driver.address.province%>" />
           </div>
           <div class="col-md-3">
             <label for="inputPostalCode"
@@ -278,7 +292,7 @@
               class="form-control"
               id="inputPostalCode"
               name="inputPostalCode"
-              value="<%= driver.address.postalCode %>" />
+              value="<%= data ? data.inputPostalCode : driver.address.postalCode %>" />
           </div>
           <!-- Divider-->
           <hr class="my-4" />
@@ -291,7 +305,7 @@
               class="form-control"
               id="inputCarMake"
               name="inputCarMake"
-              value="<%= driver.carMake %>" />
+              value="<%= data ? data.inputCarMake : driver.carMake %>" />
           </div>
           <div class="col-md-6">
             <label for="inputCarModel"
@@ -300,7 +314,7 @@
               class="form-control"
               id="inputCarModel"
               name="inputCarModel"
-              value="<%= driver.carModel %>" />
+              value="<%= data ? data.inputCarModel : driver.carModel %>" />
           </div>
           <div class="col-md-6">
             <label for="inputCarYear"
@@ -309,7 +323,7 @@
               class="form-control"
               id="inputCarYear"
               name="inputCarYear"
-              value="<%= driver.carYear %>" />
+              value="<%= data ? data.inputCarYear : driver.carYear %>" />
           </div>
           <div class="col-md-6">
             <label for="inputCarPlatNumber"
@@ -318,7 +332,7 @@
               class="form-control"
               id="inputCarPlatNumber"
               name="inputCarPlatNumber"
-              value="<%= driver.carPlatNumber %>" />
+              value="<%= data ? data.inputCarPlatNumber : driver.carPlatNumber %>" />
           </div>
           <div class="col-md-12">
             <label for="inputCarLicenceNumber"

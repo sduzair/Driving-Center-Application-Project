@@ -10,21 +10,26 @@ module.exports = async function readDriverDetails( req, res ) {
         errors: error.errors
           ? Object.keys( error.errors ).map( key => error.errors[ key ].message )
           : [ "Error finding driver!" ],
-        serverMsgs: null
+        serverMsgs: null,
+        data: null,
       } )
     } else {
       bcrypt.compare( "_defaultinputCarLicenceNumber", driverObj.carLicenceNumber, ( err, same ) => {
         if( same ) {
+          const data = req.flash( 'data' )[ 0 ]
           return res.render( "driver/g2_page", {
             driver: false,
             errors: req.flash( 'validationErrors' ),
-            serverMsgs: [ "Pls enter new driver details" ]
+            serverMsgs: data ? null : [ "Pls enter new driver details" ],
+            data: data,
           } )
         } else {
+          const data = req.flash( 'data' )[ 0 ]
           return res.render( "driver/g2_page", {
             driver: driverObj,
             errors: req.flash( 'validationErrors' ),
-            serverMsgs: [ "Driver found. You can update the details" ]
+            serverMsgs: data ? null : [ "Driver found. You can update the details" ],
+            data: data,
           } )
         }
       } )
