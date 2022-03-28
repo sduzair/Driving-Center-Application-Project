@@ -1,6 +1,6 @@
 // at the current stage only users of user type 'Driver' are able to login and access the driver dashboard
 const User = require( "../models/User" )
-const bcrypt = require( "bcrypt" )
+const bcrypt = require( "bcryptjs" )
 
 module.exports = function userLogin( req, res ) {
   const { password, username } = req.body

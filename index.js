@@ -2,7 +2,7 @@ const express = require( "express" )
 const path = require( "path" )
 const ejs = require( "ejs" )
 // for environment variables
-require( "dotenv" ).config()
+// require( "dotenv" ).config()
 //for database
 const mongoose = require( "mongoose" )
 const Driver = require( "./models/Driver" )

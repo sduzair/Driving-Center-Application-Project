@@ -1,5 +1,5 @@
 const Driver = require( "../models/Driver" )
-const bcrypt = require( "bcrypt" )
+const bcrypt = require( "bcryptjs" )
 
 module.exports = async function readDriverDetails( req, res ) {
   Driver.find( { userID: req.session.userId }, ( error, driver ) => {

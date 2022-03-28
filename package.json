@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "8796155 Uzair Ahmed Syed",
   "license": "ISC",
@@ -13,7 +13,7 @@
     "node": "16.13.1"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
