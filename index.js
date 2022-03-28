@@ -33,6 +33,7 @@ const validateUserSignup = require( "./middleware/validateSignup" )
 const validateUserLogin = require( "./middleware/validateLogin" )
 const driverAuthentication = require( "./middleware/driverAuthentication" )
 const redirectIfAuthenticated = require( "./middleware/redirectIfAuthenticated" )
+const adminAuthentication = require( "./middleware/adminAuthentication" )
 
 //importing controllers
 const driverUpdate = require( "./controllers/driverUpdate" )
@@ -47,6 +48,8 @@ const pageLogin = require( "./controllers/pageLogin" )
 const userSignup = require( "./controllers/userSignup" )
 const userLogin = require( "./controllers/userLogin" )
 const userLogout = require( "./controllers/userLogout" )
+const pageAdminDashboard = require( "./controllers/pageAdminDashboard" )
+const pageAdminAppointment = require( "./controllers/pageAdminAppointment" )
 
 const app = express()
 app.set( "view engine", "ejs" )
@@ -116,6 +119,11 @@ app.post( "/user/signup", redirectIfAuthenticated, userSignup )
 app.post( "/user/login", redirectIfAuthenticated, userLogin )
 
 app.get( "/logout", userLogout )
+
+// Assignment 4 - Day 1
+app.get( "/admin/dashboard", adminAuthentication, pageAdminDashboard )
+
+app.get( "/admin/appointment_page", adminAuthentication, pageAdminAppointment )
 
 // this middleware like route directs user to not found page after express goes through all the routes
 app.use( ( req, res ) => res.render( 'notfound' ) )

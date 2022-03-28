@@ -32,9 +32,8 @@ module.exports = function userLogin( req, res ) {
                 res.redirect( '/' )
                 // todo: redirect to first page the 'Instructor' user should see
               } else if( user.userType === "Admin" ) {
-                req.flash( 'validationErrors', [ "Admin user does not have access yet" ] )
-                res.redirect( '/' )
-                // todo: redirect to first page the 'Admin' user should see
+                req.flash( 'serverMsgs', [ "Welcome to the admin dashboard" ] )
+                res.redirect( '/admin/dashboard' )
               }
             } else {
               req.flash( 'validationErrors', [ "Incorrect username/password" ] )

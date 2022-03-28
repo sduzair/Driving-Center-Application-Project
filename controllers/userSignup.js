@@ -57,7 +57,7 @@ module.exports = async function userSignup( req, res ) {
     // creating document in 'User' Collection for user types other than 'Driver'
     User.create( userObj, ( err, user ) => {
       if( !err ) {
-        req.flash( 'serverMsgs', [ "Signup successful. But access is limited to Driver user" ] )
+        req.flash( 'serverMsgs', [ "Signup successful. Access is currently unavailable to 'Examiner' user" ] )
         res.redirect( "/login" )
       } else {
         req.flash( 'validationErrors', err.errors

@@ -2,7 +2,7 @@
 - Only Driver user is able to login and access the driver dashboard.
   - If Examiner or Admin tries to login an error message is shown.
 
-Validation Checks (other than Mongoose User Model):
+Validation Checks:
   - Signup
     - Same password check 
     - Unique username required
@@ -15,3 +15,4 @@ Validation Checks (other than Mongoose User Model):
   - Existing Driver form
     - All fields are required
     - Driver allowed to change certain fields
+  - Every form retains the entered fields upon validation errors  
