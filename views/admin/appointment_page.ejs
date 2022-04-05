@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+  <!-- CALENDAR WIDGET -->
+  <!-- Popperjs -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+  <!-- Tempus Dominus JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+    crossorigin="anonymous"></script>
+
+  <!-- Tempus Dominus Styles -->
+  <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
+    rel="stylesheet"
+    crossorigin="anonymous">
+</head>
 <%- include ('../layouts/header'); -%>
+
 
 <body>
   <!-- Navigation-->
@@ -11,15 +27,197 @@
       <div class="row gx-6 gx-lg-8 justify-content-center">
         <div class="col-md-10 col-lg-10 col-xl-10">
           <div class="site-heading">
-            <h1>Under Construction</h1>
+            <h1>Set Appointment Dates</h1>
             <!-- <span class="subheading">Create an appointment</span> -->
           </div>
         </div>
       </div>
     </div>
   </header>
+  <div class="container px-4 px-lg-6">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <!-- Divider-->
+      <hr class="my-4" />
+      <form action="/admins/appointments#inlinePicker"
+        method="POST">
+        <!-- DATE PICKER -->
+        <div class="calendar-container">
+          <div class="calendar-item">
+            <div class='log-event'
+              id='inlinePicker'>
+            </div>
+          </div>
+          <div class="btn-appointment-add-item">
+            <button type="submit"
+              id="btn-add-appointment"
+              class="btn btn-outline-primary">Add appointment</button>
+          </div>
+          <div class="list-appointment-slots-item">
+            <div class="btn-group appointment-slot-list">
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option1"
+                autocomplete="off"
+                value="09:00" />
+              <label class="btn btn-outline-primary"
+                for="option1">09:00 - 09:30</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option2"
+                autocomplete="off"
+                value="09:30" />
+              <label class="btn btn-outline-primary"
+                for="option2">09:30 - 10:00</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option3"
+                autocomplete="off"
+                value="10:00" />
+              <label class="btn btn-outline-primary"
+                for="option3">10:00 - 10:30</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option4"
+                autocomplete="off"
+                value="10:30" />
+              <label class="btn btn-outline-primary"
+                for="option4">10:30 - 11:00</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option5"
+                autocomplete="off"
+                value="11:00" />
+              <label class="btn btn-outline-primary"
+                for="option5">11:00 - 11:30</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option6"
+                autocomplete="off"
+                value="11:30" />
+              <label class="btn btn-outline-primary"
+                for="option6">11:30 - 12:00</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option7"
+                autocomplete="off"
+                value="12:00" />
+              <label class="btn btn-outline-primary"
+                for="option7">12:00 - 12:30</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option8"
+                autocomplete="off"
+                value="12:30" />
+              <label class="btn btn-outline-primary"
+                for="option8">12:30 - 01:00</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option9"
+                autocomplete="off"
+                value="01:00" />
+              <label class="btn btn-outline-primary"
+                for="option9">01:00 - 01:30</label>
+
+              <input type="radio"
+                class="btn-check"
+                name="appointmentTime"
+                id="option10"
+                autocomplete="off"
+                value="01:30" />
+              <label class="btn btn-outline-primary"
+                for="option10">01:30 - 02:00</label>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- Divider-->
+      <hr class="my-4" />
+    </div>
+  </div>
+  <div class="custom-alerts">
+    <!-- Validation Errors -->
+    <% if( errors != null && errors.length > 0 ) { %>
+    <% for( var i = 0; i < errors.length; i++ ) { %>
+    <div class="custom-alert-red">
+      <span class="closebtn"
+        onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Server:</strong> <%= errors[i] %>
+    </div>
+    <% } %>
+    <% } %>
+    <!-- Server Messages -->
+    <% if( serverMsgs != null && serverMsgs.length > 0 ) { %>
+    <% for( var i = 0; i < serverMsgs.length; i++ ) { %>
+    <div class="custom-alert-yellow">
+      <span class="closebtn"
+        onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Server:</strong> <%= serverMsgs[i] %>
+    </div>
+    <% } %>
+    <% } %>
+  </div>
   <%- include ('../layouts/footer.ejs'); -%>
   <%- include ('../layouts/scripts.ejs'); -%>
+  <script>
+    const picker = new tempusDominus.TempusDominus( document.getElementById( 'inlinePicker' ), {
+      display: {
+        inline: true,
+        components: {
+          decades: true,
+          year: true,
+          month: true,
+          date: true,
+          hours: false,
+          minutes: false,
+          seconds: false,
+        }
+      },
+      stepping: 30,
+      restrictions: {
+        daysOfWeekDisabled: [ 0, 6 ],
+        minDate: new Date( new Date().setHours( 0, 0, 0, 0 ) ),
+      },
+      promptTimeOnDateChange: true,
+    } )
+
+    const form = document.querySelector( 'form' )
+    form.addEventListener( 'submit', event => {
+      // submit event detected
+      event.preventDefault()
+
+      const calDate = picker.viewDate
+
+      // Create an input element for appointment date
+      var AD = document.createElement( "input" )
+      AD.setAttribute( "type", "text" )
+      AD.setAttribute( "name", "appointmentDate" )
+      AD.setAttribute( "value", `${ calDate.getMonth() + 1 }/${ calDate.getDate() }/${ calDate.getFullYear() }` )
+      AD.style.display = "none"
+
+      // Append the appointment date input to the form
+      form.appendChild( AD )
+      form.submit()
+
+      AD.remove()
+    } )
+  </script>
 </body>
 
 </html>

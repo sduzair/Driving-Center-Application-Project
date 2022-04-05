@@ -1,8 +1,6 @@
 const express = require( "express" )
 const path = require( "path" )
 const ejs = require( "ejs" )
-// for environment variables
-// require( "dotenv" ).config()
 //for database
 const mongoose = require( "mongoose" )
 const Driver = require( "./models/Driver" )
@@ -11,6 +9,8 @@ const fileUpload = require( "express-fileupload" )
 // for user session
 const expressSession = require( "express-session" )
 const flash = require( "connect-flash" )
+// for development environment variables
+require( "dotenv" ).config()
 
 const ONE_DAY = 1000 * 60 * 60 * 24
 const {
@@ -50,6 +50,7 @@ const userLogin = require( "./controllers/userLogin" )
 const userLogout = require( "./controllers/userLogout" )
 const pageAdminDashboard = require( "./controllers/pageAdminDashboard" )
 const pageAdminAppointment = require( "./controllers/pageAdminAppointment" )
+const appointmentNew = require( "./controllers/appointmentNew" )
 
 const app = express()
 app.set( "view engine", "ejs" )
@@ -73,10 +74,10 @@ app.use(
 )
 app.use( flash() )
 
-app.use( "/driver/new-driver", validateNewDriver )
+app.use( "/drivers/recordDriver", validateNewDriver )
 // app.use( "/driver/update-driver", validateExistingDriver )
-app.use( "/user/signup", validateUserSignup )
-app.use( "/user/login", validateUserLogin )
+app.use( "/users/signup", validateUserSignup )
+app.use( "/users/login", validateUserLogin )
 
 global.loggedIn = null
 app.use( "*", ( req, res, next ) => {
@@ -94,40 +95,45 @@ mongoose.connect( "mongodb+srv://" + DB_USERNAME + ":" + DB_PASSWORD + "@sandbox
 
 // routing
 // driver authentication prevents any user other than 'Driver' from access
-app.post( "/driver/update-driver", driverAuthentication, driverUpdate )
+app.post( "/drivers/updateDriver", driverAuthentication, driverUpdate )
 
 // app.post( "/driver/driver-details", driverAuthentication, driverFetch )
 
-app.post( "/driver/new-driver", driverAuthentication, driverNew )
+app.post( "/drivers/recordDriver", driverAuthentication, driverNew )
 
 app.get( "/", pageHome )
 
 app.get( "/index", pageHome )
 
-app.get( "/driver/dashboard", driverAuthentication, pageDriverDashboard )
+app.get( "/drivers/dashboard-page", driverAuthentication, pageDriverDashboard )
 
-app.get( "/driver/g2_page", driverAuthentication, pageG2 )
+app.get( "/drivers/g2-page", driverAuthentication, pageG2 )
 
-app.get( "/driver/g_page", driverAuthentication, pageG )
+app.get( "/drivers/g-page", driverAuthentication, pageG )
 
 app.get( "/signup", redirectIfAuthenticated, pageSignup )
 
 app.get( "/login", redirectIfAuthenticated, pageLogin )
 
-app.post( "/user/signup", redirectIfAuthenticated, userSignup )
+app.post( "/users/signup", redirectIfAuthenticated, userSignup )
 
-app.post( "/user/login", redirectIfAuthenticated, userLogin )
+app.post( "/users/login", redirectIfAuthenticated, userLogin )
 
 app.get( "/logout", userLogout )
 
-// Assignment 4 - Day 1
-app.get( "/admin/dashboard", adminAuthentication, pageAdminDashboard )
+app.get( "/admins/dashboard-page", adminAuthentication, pageAdminDashboard )
 
-app.get( "/admin/appointment_page", adminAuthentication, pageAdminAppointment )
+app.get( "/admins/appointment-page", adminAuthentication, pageAdminAppointment )
 
+app.post( "/admins/appointments", adminAuthentication, appointmentNew )
+
+
+// Assignment 4 - Day 2
+// app.post( "/admin/appointments", adminAuthentication, postAppoinments )
 // this middleware like route directs user to not found page after express goes through all the routes
 app.use( ( req, res ) => res.render( 'notfound' ) )
 
 app.listen( PORT, () => {
   console.log( `Listening on port: ${ PORT }` )
 } )
+

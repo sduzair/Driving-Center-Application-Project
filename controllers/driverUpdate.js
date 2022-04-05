@@ -22,11 +22,11 @@ module.exports = async function updateDriverDetails( req, res ) {
         ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
         : [ "Unable to update driver details" ] )
       req.flash( 'data', req.body )
-      res.redirect( '/driver/g2_page' )
+      res.redirect( '/drivers/g2-page' )
     }
     else {
       req.flash( 'serverMsgs', [ 'Update successful' ] )
-      res.redirect( "/driver/dashboard" )
+      res.redirect( "/drivers/dashboard-page" )
     }
   } )
 

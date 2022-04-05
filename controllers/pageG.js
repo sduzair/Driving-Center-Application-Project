@@ -16,7 +16,7 @@ module.exports = async function readDriverDetails( req, res ) {
       bcrypt.compare( "_defaultinputCarLicenceNumber", driverObj.carLicenceNumber, ( err, same ) => {
         if( same ) {
           req.flash( 'validationErrors', [ 'First enter new driver details' ] )
-          return res.redirect( "/driver/g2_page" )
+          return res.redirect( "/drivers/g2-page" )
         } else {
           return res.render( "driver/g_page", {
             driver: driverObj,

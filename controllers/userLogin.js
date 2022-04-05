@@ -26,14 +26,14 @@ module.exports = function userLogin( req, res ) {
               req.session.userType = user.userType
               if( user.userType === "Driver" ) {
                 req.flash( 'serverMsgs', [ "Welcome to the driver dashboard" ] )
-                res.redirect( "/driver/dashboard" )
+                res.redirect( "/drivers/dashboard-page" )
               } else if( user.userType === "Examiner" ) {
                 req.flash( 'validationErrors', [ "Examiner user does not have access yet" ] )
                 res.redirect( '/' )
                 // todo: redirect to first page the 'Instructor' user should see
               } else if( user.userType === "Admin" ) {
                 req.flash( 'serverMsgs', [ "Welcome to the admin dashboard" ] )
-                res.redirect( '/admin/dashboard' )
+                res.redirect( '/admins/dashboard-page' )
               }
             } else {
               req.flash( 'validationErrors', [ "Incorrect username/password" ] )

@@ -53,7 +53,22 @@ module.exports = async function userSignup( req, res ) {
         res.redirect( "/signup" )
       }
     } )
-  } else {
+  } else if( req.body.userType === 'Admin' ) {
+    // creating document in 'User' Collection for user types other than 'Driver'
+    User.create( userObj, ( err, user ) => {
+      if( !err ) {
+        req.flash( 'serverMsgs', [ "Signup successful." ] )
+        res.redirect( "/login" )
+      } else {
+        req.flash( 'validationErrors', err.errors
+          ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
+          : [ "Unable to create user" ] )
+
+        req.flash( 'data', req.body )
+        res.redirect( "/signup" )
+      }
+    } )
+  } else if( req.body.userType === 'Examiner' ) {
     // creating document in 'User' Collection for user types other than 'Driver'
     User.create( userObj, ( err, user ) => {
       if( !err ) {
