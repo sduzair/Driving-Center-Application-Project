@@ -1,4 +1,5 @@
 const mongoose = require( "mongoose" )
+const uniqueValidator = require( 'mongoose-unique-validator' )
 
 const AppointmentSchema = new mongoose.Schema( {
   appointmentTime: {
@@ -8,9 +9,20 @@ const AppointmentSchema = new mongoose.Schema( {
   appointmentDate: {
     required: [ true, 'Please provide appointment date' ],
     type: String,
+  },
+  duration: {
+    default: "30min",
+    type: String
   }
 },
   { timestamps: true } )
+
+AppointmentSchema.index( {
+  "appointmentTime": 1,
+  "appointmentDate": 1
+}, { "unique": true } )
+
+AppointmentSchema.plugin( uniqueValidator, { message: 'Appointment slot already exists' } )
 
 AppointmentSchema.pre( 'create', function( next ) {
   this.options.runValidators = true

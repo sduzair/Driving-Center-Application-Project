@@ -27,7 +27,7 @@
       <div class="row gx-6 gx-lg-8 justify-content-center">
         <div class="col-md-10 col-lg-10 col-xl-10">
           <div class="site-heading">
-            <h1>Set Appointment Dates</h1>
+            <h1>Sets Appointment Dates</h1>
             <!-- <span class="subheading">Create an appointment</span> -->
           </div>
         </div>
@@ -151,6 +151,8 @@
       <hr class="my-4" />
     </div>
   </div>
+  <div id="serverTime"
+    style="display:none"><%= serverTime %></div>
   <div class="custom-alerts">
     <!-- Validation Errors -->
     <% if( errors != null && errors.length > 0 ) { %>
@@ -176,6 +178,9 @@
   <%- include ('../layouts/footer.ejs'); -%>
   <%- include ('../layouts/scripts.ejs'); -%>
   <script>
+    // datepicker setup requires input element with server time as value
+    const minDateText = document.getElementById( "serverTime" ).textContent
+    const calMinDate = new Date( minDateText ).setHours( 0, 0, 0, 0 )
     const picker = new tempusDominus.TempusDominus( document.getElementById( 'inlinePicker' ), {
       display: {
         inline: true,
@@ -192,11 +197,12 @@
       stepping: 30,
       restrictions: {
         daysOfWeekDisabled: [ 0, 6 ],
-        minDate: new Date( new Date().setHours( 0, 0, 0, 0 ) ),
+        minDate: new Date( calMinDate ),
       },
       promptTimeOnDateChange: true,
     } )
 
+    // form submission
     const form = document.querySelector( 'form' )
     form.addEventListener( 'submit', event => {
       // submit event detected
@@ -217,6 +223,58 @@
 
       AD.remove()
     } )
+
+    // these radio buttons are disabled when the appointment slots exist
+    const aptTimeRadioButtons = document.getElementsByName( "appointmentTime" )
+
+    // success, fail, handleResponseError functions for fetch api reteiving appointment timings for selected date 
+    const handleResponseError = ( response ) => {
+      if( !response.ok ) {
+        //response.ok is true even when url in wrong format i.e. response body not as expected
+        throw response.status + ": " + response.statusText
+      }
+      return response.json()
+    }
+
+    const fail = ( error ) => {
+      console.log( "Unable to make a request to API " + error )
+      alert( "Unable to make zipcode request to API" )
+    }
+
+    const succeed = ( data ) => {
+      aptTimeRadioButtons.forEach( rb => {
+        rb.removeAttribute( "disabled" )
+      } )
+
+      aptTimeRadioButtons.forEach( rb => {
+        data.appointment.forEach( apt => {
+          if( rb.value === apt.appointmentTime )
+            rb.setAttribute( 'disabled', true )
+        } )
+      } )
+    }
+    // fired when a date is selected on the datepicker - gets appointments times for the day
+    picker.subscribe( tempusDominus.Namespace.events.change, ( e ) => {
+      const selectedDate = e.date.toLocaleString( 'en', {
+        timeZone: 'America/Toronto'
+      } ).split( ',' )[ 0 ]
+
+      const url = window.location.origin + `/admins/appointments/${ selectedDate }`
+      fetch( url )
+        .then( ( response ) => handleResponseError( response ) )
+        .then( ( data ) => succeed( data ) )
+        .catch( ( error ) => fail( error ) )
+    } )
+
+    // disabling radio buttons on page load depending on date in calendar
+    const presentDate = new Date( calMinDate ).toLocaleString( 'en', {
+      timeZone: 'America/Toronto'
+    } ).split( ',' )[ 0 ]
+    const url = window.location.origin + `/admins/appointments/${ presentDate }`
+    fetch( url )
+      .then( ( response ) => handleResponseError( response ) )
+      .then( ( data ) => succeed( data ) )
+      .catch( ( error ) => fail( error ) )
   </script>
 </body>
 

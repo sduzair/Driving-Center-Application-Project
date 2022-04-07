@@ -51,6 +51,7 @@ const userLogout = require( "./controllers/userLogout" )
 const pageAdminDashboard = require( "./controllers/pageAdminDashboard" )
 const pageAdminAppointment = require( "./controllers/pageAdminAppointment" )
 const appointmentNew = require( "./controllers/appointmentNew" )
+const appointmentsFetch = require( "./controllers/appointmentsFetch" )
 
 const app = express()
 app.set( "view engine", "ejs" )
@@ -121,11 +122,13 @@ app.post( "/users/login", redirectIfAuthenticated, userLogin )
 
 app.get( "/logout", userLogout )
 
-app.get( "/admins/dashboard-page", adminAuthentication, pageAdminDashboard )
+app.get( "/admins/dashboard-page", pageAdminDashboard )
 
-app.get( "/admins/appointment-page", adminAuthentication, pageAdminAppointment )
+app.get( "/admins/appointment-page", pageAdminAppointment )
 
-app.post( "/admins/appointments", adminAuthentication, appointmentNew )
+app.post( "/admins/appointments", appointmentNew )
+
+app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
 
 
 // Assignment 4 - Day 2
