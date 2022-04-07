@@ -10,7 +10,7 @@ const fileUpload = require( "express-fileupload" )
 const expressSession = require( "express-session" )
 const flash = require( "connect-flash" )
 // for development environment variables
-require( "dotenv" ).config()
+// require( "dotenv" ).config()
 
 const ONE_DAY = 1000 * 60 * 60 * 24
 const {
@@ -122,13 +122,13 @@ app.post( "/users/login", redirectIfAuthenticated, userLogin )
 
 app.get( "/logout", userLogout )
 
-app.get( "/admins/dashboard-page", pageAdminDashboard )
+app.get( "/admins/dashboard-page", adminAuthentication, pageAdminDashboard )
 
-app.get( "/admins/appointment-page", pageAdminAppointment )
+app.get( "/admins/appointment-page", adminAuthentication, pageAdminAppointment )
 
-app.post( "/admins/appointments", appointmentNew )
+app.post( "/admins/appointments", adminAuthentication, appointmentNew )
 
-app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
+app.get( "/admins/appointments/:month/:day/:year", adminAuthentication, appointmentsFetch )
 
 
 // Assignment 4 - Day 2
