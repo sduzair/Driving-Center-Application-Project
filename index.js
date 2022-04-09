@@ -122,15 +122,15 @@ app.post( "/users/login", redirectIfAuthenticated, userLogin )
 
 app.get( "/logout", userLogout )
 
-app.get( "/admins/dashboard-page", pageAdminDashboard )
+app.get( "/admins/dashboard-page", adminAuthentication, pageAdminDashboard )
 
-app.get( "/admins/appointment-page", pageAdminAppointment )
+app.get( "/admins/appointment-page", adminAuthentication, pageAdminAppointment )
 
-app.post( "/admins/appointments", appointmentNew )
+app.post( "/admins/appointments", adminAuthentication, appointmentNew )
 
 app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
 
-app.post( "/drivers/bookAppointment", driverBookAppointment )
+app.post( "/drivers/bookAppointment", adminAuthentication, driverBookAppointment )
 
 
 // Assignment 4 - Day 2
