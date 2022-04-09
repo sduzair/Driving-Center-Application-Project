@@ -18,72 +18,70 @@
       </div>
     </div>
   </header>
+
   <!-- Main Content-->
-  <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <!-- Divider-->
-        <hr class="my-4" />
-        <!-- Post preview-->
-        <div class="post-preview">
-          <a href="/drivers/g2-page">
-            <h2 class="post-title">
-              G2 Licence
-            </h2>
-          </a>
-        </div>
-        <!-- Divider-->
-        <hr class="my-4" />
-        <!-- Post preview-->
-        <div class="post-preview">
-          <a href="/drivers/g-page">
-            <h2 class="post-title">
-              G Licence
-            </h2>
-          </a>
-        </div>
+  <div class="container mb-5">
+    <div class="row gx-4 mx-5">
+      <div class="col-md-6 col-lg-6 col-xl-6">
+
+        <a href="/drivers/g2-page">
+          <div class="card myBoxShadow mx-auto"
+            style="width:25rem;">
+            <img src="/img/driverDash1.jpg"
+              class="card-img-top"
+              alt="beginner driver">
+            <div class="card-body">
+              <h5 class="card-title">G2 Licence</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                content. This content is a little bit longer.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-6 col-xl-6">
+        <a href="/drivers/g-page">
+          <div class="card myBoxShadow mx-auto"
+            style="width:25rem;">
+            <img src="/img/driverDash2.jpg"
+              class="card-img-top"
+              alt="advanced driver">
+            <div class="card-body">
+              <h5 class="card-title">G Licence</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                content. This content is a little bit longer.</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
-    <!-- Alert on new user creation -->
-    <!--  if(msg === "New driver created."){ %>
-    <div class="custom-alert-green">
+  </div>
+
+
+
+  <div class="custom-alerts">
+    <!-- Validation Errors -->
+    <% if( errors != null && errors.length > 0 ) { %>
+    <% for( var i = 0; i < errors.length; i++ ) { %>
+    <div class="custom-alert-red">
       <span class="closebtn"
         onclick="this.parentElement.style.display='none';">&times;</span>
-      <strong>Valid entries:</strong> New driver created.
+      <strong>Server:</strong> <%= errors[i] %>
     </div>
-     } %> -->
-    <!-- Alert on user details update -->
-    <!--  if(msg === "Driver details were updated."){ %>
-    <div class="custom-alert-green">
+    <% } %>
+    <% } %>
+    <!-- Server Messages -->
+    <% if( serverMsgs != null && serverMsgs.length > 0 ) { %>
+    <% for( var i = 0; i < serverMsgs.length; i++ ) { %>
+    <div class="custom-alert-yellow">
       <span class="closebtn"
         onclick="this.parentElement.style.display='none';">&times;</span>
-      <strong>Valid entries:</strong> Driver details were updated.
+      <strong>Server:</strong> <%= serverMsgs[i] %>
     </div>
-     } %> -->
-    <div class="custom-alerts">
-      <!-- Validation Errors -->
-      <% if( errors != null && errors.length > 0 ) { %>
-      <% for( var i = 0; i < errors.length; i++ ) { %>
-      <div class="custom-alert-red">
-        <span class="closebtn"
-          onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Server:</strong> <%= errors[i] %>
-      </div>
-      <% } %>
-      <% } %>
-      <!-- Server Messages -->
-      <% if( serverMsgs != null && serverMsgs.length > 0 ) { %>
-      <% for( var i = 0; i < serverMsgs.length; i++ ) { %>
-      <div class="custom-alert-yellow">
-        <span class="closebtn"
-          onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Server:</strong> <%= serverMsgs[i] %>
-      </div>
-      <% } %>
-      <% } %>
-    </div>
-    <%- include ('../layouts/footer.ejs'); -%>
-    <%- include ('../layouts/scripts.ejs'); -%>
+    <% } %>
+    <% } %>
+  </div>
+  <%- include ('../layouts/footer.ejs'); -%>
+  <%- include ('../layouts/scripts.ejs'); -%>
 </body>
 
 </html>

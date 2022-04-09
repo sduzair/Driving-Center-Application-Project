@@ -13,6 +13,10 @@ const AppointmentSchema = new mongoose.Schema( {
   duration: {
     default: "30min",
     type: String
+  },
+  isTimeSlotAvailable: {
+    default: true,
+    type: Boolean
   }
 },
   { timestamps: true } )
@@ -25,6 +29,11 @@ AppointmentSchema.index( {
 AppointmentSchema.plugin( uniqueValidator, { message: 'Appointment slot already exists' } )
 
 AppointmentSchema.pre( 'create', function( next ) {
+  this.options.runValidators = true
+  next()
+} )
+
+AppointmentSchema.pre( 'findOneAndUpdate', function( next ) {
   this.options.runValidators = true
   next()
 } )

@@ -3,7 +3,6 @@ const path = require( "path" )
 const ejs = require( "ejs" )
 //for database
 const mongoose = require( "mongoose" )
-const Driver = require( "./models/Driver" )
 //for form multimedia data
 const fileUpload = require( "express-fileupload" )
 // for user session
@@ -27,13 +26,12 @@ const {
 const IN_PROD = NODE_ENV === 'production'
 
 //middleware for validation
-const validateNewDriver = require( "./middleware/validateNewDriver" )
-const validateExistingDriver = require( "./middleware/validateExistingDriver" )
 const validateUserSignup = require( "./middleware/validateSignup" )
 const validateUserLogin = require( "./middleware/validateLogin" )
 const driverAuthentication = require( "./middleware/driverAuthentication" )
 const redirectIfAuthenticated = require( "./middleware/redirectIfAuthenticated" )
 const adminAuthentication = require( "./middleware/adminAuthentication" )
+const adminDriverAuthentication = require( "./middleware/driverAdminAuthentication" )
 
 //importing controllers
 const driverUpdate = require( "./controllers/driverUpdate" )
@@ -52,6 +50,7 @@ const pageAdminDashboard = require( "./controllers/pageAdminDashboard" )
 const pageAdminAppointment = require( "./controllers/pageAdminAppointment" )
 const appointmentNew = require( "./controllers/appointmentNew" )
 const appointmentsFetch = require( "./controllers/appointmentsFetch" )
+const driverBookAppointment = require( "./controllers/driverBookAppointment" )
 
 const app = express()
 app.set( "view engine", "ejs" )
@@ -75,10 +74,10 @@ app.use(
 )
 app.use( flash() )
 
-app.use( "/drivers/recordDriver", validateNewDriver )
-// app.use( "/driver/update-driver", validateExistingDriver )
 app.use( "/users/signup", validateUserSignup )
 app.use( "/users/login", validateUserLogin )
+// todo: add auth middleware
+app.use( "/drivers/bookAppointment", adminDriverAuthentication )
 
 global.loggedIn = null
 app.use( "*", ( req, res, next ) => {
@@ -122,13 +121,15 @@ app.post( "/users/login", redirectIfAuthenticated, userLogin )
 
 app.get( "/logout", userLogout )
 
-app.get( "/admins/dashboard-page", adminAuthentication, pageAdminDashboard )
+app.get( "/admins/dashboard-page", pageAdminDashboard )
 
-app.get( "/admins/appointment-page", adminAuthentication, pageAdminAppointment )
+app.get( "/admins/appointment-page", pageAdminAppointment )
 
-app.post( "/admins/appointments", adminAuthentication, appointmentNew )
+app.post( "/admins/appointments", appointmentNew )
 
-app.get( "/admins/appointments/:month/:day/:year", adminAuthentication, appointmentsFetch )
+app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
+
+app.post( "/drivers/bookAppointment", driverBookAppointment )
 
 
 // Assignment 4 - Day 2

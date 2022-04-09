@@ -70,6 +70,13 @@ const DriverSchema = new mongoose.Schema( {
     required: [ true, 'Please provide image 2' ],
     type: String,
   },
+  appointmentID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Appointment"
+  },
+  appointmentType: {
+    type: String
+  }
 } )
 
 DriverSchema.pre( "save", function( next ) {

@@ -9,7 +9,7 @@ module.exports = ( req, res ) => {
   }, err => {
     if( !err ) {
       req.flash( 'serverMsgs', [ "Appointment created successfully." ] )
-      res.redirect( "/admins/dashboard-page" )
+      res.redirect( "/admins/appointment-page" )
     } else {
       req.flash( 'validationErrors', err.errors
         ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
