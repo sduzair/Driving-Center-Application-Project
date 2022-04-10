@@ -9,7 +9,7 @@ const fileUpload = require( "express-fileupload" )
 const expressSession = require( "express-session" )
 const flash = require( "connect-flash" )
 // for development environment variables
-// ! comment this line before deployment
+// ! comment this line before deployment or ensure .env is in .gitignore
 require( "dotenv" ).config()
 
 const ONE_DAY = 1000 * 60 * 60 * 24
@@ -130,7 +130,7 @@ app.post( "/admins/appointments", adminAuthentication, appointmentNew )
 
 app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
 
-app.post( "/drivers/bookAppointment", adminAuthentication, driverBookAppointment )
+app.post( "/drivers/bookAppointment", driverAuthentication, driverBookAppointment )
 
 
 // Assignment 4 - Day 2
