@@ -10,7 +10,7 @@ const expressSession = require( "express-session" )
 const flash = require( "connect-flash" )
 // for development environment variables
 // ! comment this line before deployment
-// require( "dotenv" ).config()
+require( "dotenv" ).config()
 
 const ONE_DAY = 1000 * 60 * 60 * 24
 const {

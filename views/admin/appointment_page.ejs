@@ -4,8 +4,8 @@
 <head>
   <!-- CALENDAR WIDGET -->
   <!-- Popperjs -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
-    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+    crossorigin="anonymous"></script> -->
   <!-- Tempus Dominus JavaScript -->
   <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
     crossorigin="anonymous"></script>
@@ -22,13 +22,14 @@
   <!-- Navigation-->
   <%- include ('../layouts/nav'); -%>
   <!-- Page Header-->
-  <header class="masthead-driver-background masthead">
+  <header class="masthead"
+    style="background-image: url('/assets/mastheadImages/estee-janssens-mO3s5xdo68Y-unsplash.jpg');">
     <div class="container position-relative px-8 px-lg-8">
       <div class="row gx-6 gx-lg-8 justify-content-center">
         <div class="col-md-10 col-lg-10 col-xl-10">
           <div class="site-heading">
             <h1>Create Appointment Slots</h1>
-            <!-- <span class="subheading">Create an appointment</span> -->
+            <span class="subheading">Slots can be booked for G or G2 test.</span>
           </div>
         </div>
       </div>
@@ -49,7 +50,8 @@
             <div class="btn-appointment-add-item">
               <button type="submit"
                 id="btn-add-appointment"
-                class="btn btn-outline-primary">Add appointment</button>
+                class="btn btn-outline-primary"
+                data-aos="flip-up">Add appointment</button>
             </div>
             <div class="list-appointment-slots-item">
               <div class="btn-group appointment-slot-list">

@@ -6,8 +6,8 @@
 <head>
   <!-- CALENDAR WIDGET -->
   <!-- Popperjs -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
-    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+    crossorigin="anonymous"></script> -->
   <!-- Tempus Dominus JavaScript -->
   <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
     crossorigin="anonymous"></script>
@@ -24,7 +24,8 @@
   <!-- Navigation-->
   <%- include ('../layouts/nav'); -%>
   <!-- Page Header-->
-  <header class="masthead-driver-g2-background masthead">
+  <header class="masthead"
+    style="background-image: url('/assets/mastheadImages/bezevision-GNml08TffNA-unsplash.jpg');">
     <div class="container position-relative px-4 px-lg-5">
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
@@ -193,7 +194,7 @@
             <button type="submit"
               class="btn btn-primary"
               id="btnUpdate"
-              disabled>Update</button>
+              data-aos="flip-up">Update</button>
           </div>
         </form>
       </div>
@@ -208,7 +209,8 @@
         <div style="display:none;"><%= appointmentDetail.duration %></div>
 
         <!--digital clock start-->
-        <div class="datetime mx-auto mt-4">
+        <div class="datetime mx-auto mt-4"
+          data-aos="zoom-out-up">
           <div class="date">
             <span id="dayname">Day</span>,
             <span id="month">Month</span>
@@ -241,9 +243,12 @@
             <div class="btn-appointment-add-item">
               <button type="submit"
                 id="btn-add-appointment"
-                class="btn btn-outline-primary">Book appointment</button>
+                class="btn btn-outline-primary"
+                data-aos="flip-up">Book appointment</button>
             </div>
-            <div class="list-appointment-slots-item">
+            <div class="list-appointment-slots-item"
+              data-bs-toggle="tooltip"
+              title="Slots added by admin user are visible here">
               <div class="btn-group appointment-slot-list">
                 <input type="radio"
                   class="btn-check"
@@ -523,7 +528,8 @@
           </div>
           <div class="col-12">
             <button type="submit"
-              class="btn btn-primary">Submit</button>
+              class="btn btn-primary"
+              data-aos="flip-up">Submit</button>
           </div>
         </form>
       </div>
@@ -559,7 +565,7 @@
 
   <%- include ('../layouts/footer.ejs'); -%>
   <%- include ('../layouts/scripts.ejs'); -%>
-  <script src="/js/activate-btn.js"></script>
+  <!-- <script src="/js/activate-btn.js"></script> -->
   <% if( !appointmentDetail && driver ) { %>
   <!-- datepicker setup requires input element with server time as value -->
   <script src="/js/datepicker-init.js"></script>

@@ -4,3 +4,17 @@
 <script src="/js/scripts.js"></script>
 <!-- highlights current page link -->
 <script src="/js/nav-bar.js"></script>
+<!-- tooltips -->
+<script>
+  var tooltipTriggerList = [].slice.call( document.querySelectorAll( '[data-bs-toggle="tooltip"]' ) )
+  var tooltipList = tooltipTriggerList.map( function( tooltipTriggerEl ) {
+    return new bootstrap.Tooltip( tooltipTriggerEl )
+  } )
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init( {
+    once: true,
+    duration: 750,
+  } );
+</script>

@@ -1,5 +1,5 @@
 
-document.addEventListener( 'DOMContentLoaded', () => {
+document.addEventListener( 'DOMContentLoaded', async () => {
   let [ month, day, year ] = document.getElementById( "appointmentDate" ).textContent.split( '/' )
   const [ hours, mins ] = document.getElementById( "appointmentTime" ).textContent.split( ':' )
 
