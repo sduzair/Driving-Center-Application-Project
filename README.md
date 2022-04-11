@@ -1,6 +1,4 @@
-- All user types (Driver, Examiner and Admin) are able to signup.
-- Only Driver user is able to login and access the driver dashboard.
-  - If Examiner or Admin tries to login an error message is shown.
+# Driving-Licence-Application
 
 Validation Checks:
   - Signup
@@ -20,4 +18,4 @@ Validation Checks:
 Assumptions:
   - Admin user creates appointment slots
   - Driver user can book a slot for G or G2 test
-  - Once a slot is booked by a user for G or G2 test the slot is reserved
+  - Once a slot is booked by a driver user for G or G2 test the slot is reserved
