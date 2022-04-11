@@ -1,6 +1,4 @@
-- All user types (Driver, Examiner and Admin) are able to signup.
-- Only Driver user is able to login and access the driver dashboard.
-  - If Examiner or Admin tries to login an error message is shown.
+# Driving-Licence-Application
 
 Validation Checks:
   - Signup
