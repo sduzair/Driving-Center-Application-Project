@@ -9,8 +9,8 @@ const fileUpload = require( "express-fileupload" )
 const expressSession = require( "express-session" )
 const flash = require( "connect-flash" )
 // for development environment variables
-// ! comment this line before deployment or ensure .env is in .gitignore
-require( "dotenv" ).config()
+// ! comment this line for dev env variables before deployment 
+// require( "dotenv" ).config()
 
 const ONE_DAY = 1000 * 60 * 60 * 24
 const {
