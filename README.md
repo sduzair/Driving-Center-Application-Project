@@ -18,4 +18,4 @@ Validation Checks:
 Assumptions:
   - Admin user creates appointment slots
   - Driver user can book a slot for G or G2 test
-  - Once a slot is booked by a user for G or G2 test the slot is reserved
+  - Once a slot is booked by a driver user for G or G2 test the slot is reserved
