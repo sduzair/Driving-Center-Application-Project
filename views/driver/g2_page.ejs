@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% if( !appointmentDetail ) { %>
+
+<head>
+  <!-- CALENDAR WIDGET -->
+  <!-- Popperjs -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+    crossorigin="anonymous"></script> -->
+  <!-- Tempus Dominus JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/js/tempus-dominus.js"
+    crossorigin="anonymous"></script>
+
+  <!-- Tempus Dominus Styles -->
+  <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css"
+    rel="stylesheet"
+    crossorigin="anonymous">
+</head>
+<% } %>
+<%- include ('../layouts/header'); -%>
+
+<body>
+  <!-- Navigation-->
+  <%- include ('../layouts/nav'); -%>
+  <!-- Page Header-->
+  <header class="masthead"
+    style="background-image: url('/assets/mastheadImages/bezevision-GNml08TffNA-unsplash.jpg');">
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <div class="site-heading">
+            <h1>G2 Licence</h1>
+            <span class="subheading">New drivers can register for the G2 test.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <% if(driver){ %>
+
+  <div class="container mb-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+
+      <div class="col-md-12 col-lg-6 col-xl-6">
+        <form class="row g-3 userDetails"
+          action="/drivers/updateDriver#personal"
+          method="POST">
+          <!-- Divider-->
+          <!-- User details -->
+          <h2 id="personal">Personal</h2>
+          <div class="col-md-6">
+            <label for="firstName"
+              class="form-label">First Name</label>
+            <input type="text"
+              class="form-control"
+              id="firstName"
+              name="firstName"
+              readonly
+              value="<%= driver.firstName%>"></input>
+          </div>
+          <div class="col-md-6">
+            <label for="lastName"
+              class="form-label">Last Name</label>
+            <input type="text"
+              class="form-control"
+              id="lastName"
+              name="lastName"
+              readonly
+              value="<%= driver.lastName%>" />
+          </div>
+          <div class="col-md-6">
+            <label for="userID"
+              class="form-label">User ID</label>
+            <input type="text"
+              class="form-control"
+              id="userID"
+              name="userID"
+              readonly
+              value="<%= driver.userID%>" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputDOB"
+              class="form-label">Date of birth</label>
+            <input type="date"
+              class="form-control"
+              id="inputDOB"
+              name="inputDOB"
+              readonly
+              value="<%= driver.DOB %>" />
+          </div>
+          <!-- Divider-->
+          <hr class="my-4" />
+          <!-- Address -->
+          <h2>Address</h2>
+          <div class="col-md-4">
+            <label for="inputHouseNumber"
+              class="form-label">House Number</label>
+            <input type="number"
+              class="form-control"
+              id="inputHouseNumber"
+              name="inputHouseNumber"
+              value="<%= data ? data.inputHouseNumber : driver.address.houseNumber %>" />
+          </div>
+          <div class="col-md-8">
+            <label for="inputStreet"
+              class="form-label">Street</label>
+            <input type="text"
+              class="form-control"
+              id="inputStreet"
+              name="inputStreet"
+              value="<%= data ? data.inputStreet : driver.address.street%>" />
+          </div>
+          <div class="col-md-5">
+            <label for="inputCity"
+              class="form-label">City</label>
+            <input type="text"
+              class="form-control"
+              id="inputCity"
+              name="inputCity"
+              value="<%= data ? data.inputCity : driver.address.city%>" />
+          </div>
+          <div class="col-md-4">
+            <label for="inputProvince"
+              class="form-label">Province</label>
+            <input type="text"
+              class="form-control"
+              id="inputProvince"
+              name="inputProvince"
+              value="<%= data ? data.inputProvince : driver.address.province%>" />
+          </div>
+          <div class="col-md-3">
+            <label for="inputPostalCode"
+              class="form-label">Postal Code</label>
+            <input type="text"
+              class="form-control"
+              id="inputPostalCode"
+              name="inputPostalCode"
+              value="<%= data ? data.inputPostalCode : driver.address.postalCode %>" />
+          </div>
+          <!-- Divider-->
+          <hr class="my-4" />
+          <!-- Car details -->
+          <h2>Car details</h2>
+          <div class="col-md-6">
+            <label for="inputCarMake"
+              class="form-label">Make</label>
+            <input type="text"
+              class="form-control"
+              id="inputCarMake"
+              name="inputCarMake"
+              value="<%= data ? data.inputCarMake : driver.carMake %>" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCarModel"
+              class="form-label">Model</label>
+            <input type="text"
+              class="form-control"
+              id="inputCarModel"
+              name="inputCarModel"
+              value="<%= data ? data.inputCarModel : driver.carModel %>" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCarYear"
+              class="form-label">Year</label>
+            <input type="number"
+              class="form-control"
+              id="inputCarYear"
+              name="inputCarYear"
+              value="<%= data ? data.inputCarYear : driver.carYear %>" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCarPlatNumber"
+              class="form-label">Plat Number</label>
+            <input type="number"
+              class="form-control"
+              id="inputCarPlatNumber"
+              name="inputCarPlatNumber"
+              value="<%= data ? data.inputCarPlatNumber : driver.carPlatNumber %>" />
+          </div>
+          <div class="col-md-12">
+            <label for="inputCarLicenceNumber"
+              class="form-label">Licence Number</label>
+            <input type="text"
+              class="form-control"
+              id="inputCarLicenceNumber"
+              placeholder="Must be 8 characters (alphanumeric)"
+              name="inputCarLicenceNumber"
+              value="<%= driver.carLicenceNumber %>"
+              readonly />
+          </div>
+          <div class="col-12">
+            <button type="submit"
+              class="btn btn-primary"
+              id="btnUpdate"
+              data-aos="flip-up">Update</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-12 col-lg-6 col-xl-6">
+        <% if(appointmentDetail && appointmentType === "G2") { %>
+        <h2>Appointment Details</h2>
+        <div style="display:none;"
+          id="appointmentDate"><%= appointmentDetail.appointmentDate %></div>
+        <div style="display:none;"
+          id="appointmentTime"><%= appointmentDetail.appointmentTime %></div>
+        <div style="display:none;"><%= appointmentDetail.duration %></div>
+
+        <!--digital clock start-->
+        <div class="datetime mx-auto mt-4"
+          data-aos="zoom-out-up">
+          <div class="date">
+            <span id="dayname">Day</span>,
+            <span id="month">Month</span>
+            <span id="daynum">00</span>,
+            <span id="year">Year</span>
+          </div>
+          <div class="time">
+            <span id="hour">00</span>:
+            <span id="minutes">00</span>
+            <!-- : -->
+            <!-- <span id="seconds">00</span> -->
+            <!-- <span id="period">AM</span> -->
+          </div>
+        </div>
+        <!--digital clock end-->
+        <% } %>
+
+        <% if( !appointmentDetail ) { %>
+        <h2>Available Time Slots</h2>
+        <form class="bookAppointment"
+          action="/drivers/bookAppointment#inlinePicker"
+          method="POST">
+          <!-- DATE PICKER -->
+          <div class="calendar-container">
+            <div class="calendar-item">
+              <div class='log-event'
+                id='inlinePicker'>
+              </div>
+            </div>
+            <div class="btn-appointment-add-item">
+              <button type="submit"
+                id="btn-add-appointment"
+                class="btn btn-outline-primary"
+                data-aos="flip-up">Book appointment</button>
+            </div>
+            <div class="list-appointment-slots-item"
+              data-bs-toggle="tooltip"
+              title="Slots added by admin user are visible here">
+              <div class="btn-group appointment-slot-list">
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option1"
+                  autocomplete="off"
+                  value="09:00"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option1">09:00 - 09:30</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option2"
+                  autocomplete="off"
+                  value="09:30"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option2">09:30 - 10:00</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option3"
+                  autocomplete="off"
+                  value="10:00"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option3">10:00 - 10:30</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option4"
+                  autocomplete="off"
+                  value="10:30"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option4">10:30 - 11:00</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option5"
+                  autocomplete="off"
+                  value="11:00"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option5">11:00 - 11:30</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option6"
+                  autocomplete="off"
+                  value="11:30"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option6">11:30 - 12:00</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option7"
+                  autocomplete="off"
+                  value="12:00"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option7">12:00 - 12:30</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option8"
+                  autocomplete="off"
+                  value="12:30"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option8">12:30 - 13:00</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option9"
+                  autocomplete="off"
+                  value="13:00"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option9">13:00 - 13:30</label>
+
+                <input type="radio"
+                  class="btn-check"
+                  name="appointmentTime"
+                  id="option10"
+                  autocomplete="off"
+                  value="13:30"
+                  disabled />
+                <label class="btn btn-outline-primary"
+                  for="option10">13:30 - 14:00</label>
+              </div>
+            </div>
+          </div>
+        </form>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <% } %>
+
+  <!-- Main Content-->
+  <% if(!driver){ %>
+  <div class="container px-4 px-lg-5 mb-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <form class="row g-3 userDetails"
+          action="/drivers/recordDriver#personal"
+          method="POST"
+          enctype="multipart/form-data">
+          <!-- User details -->
+          <h2 id="personal">Personal</h2>
+          <div class="col-md-6">
+            <label for="firstName"
+              class="form-label">First Name</label>
+            <input type="text"
+              class="form-control"
+              id="firstName"
+              name="firstName"
+              value="<%- data ? data.firstName : "" %>" />
+          </div>
+          <div class="col-md-6">
+            <label for="lastName"
+              class="form-label">Last Name</label>
+            <input type="text"
+              class="form-control"
+              id="lastName"
+              name="lastName"
+              value="<%- data ? data.lastName : "" %>" />
+          </div>
+          <!-- <div class="col-md-6">
+            <label for="userID"
+              class="form-label">User ID</label>
+            <input type="text"
+              class="form-control"
+              id="userID"
+              name="userID"
+              value=" data ? data.userID : "" " />
+          </div> -->
+          <div class="col-md-6">
+            <label for="inputDOB"
+              class="form-label">Date of birth</label>
+            <input type="date"
+              class="form-control"
+              id="inputDOB"
+              name="inputDOB"
+              value="<%- data ? data.inputDOB : "" %>" />
+          </div>
+          <!-- Divider-->
+          <hr class="my-4" />
+          <!-- Address -->
+          <h2>Address</h2>
+          <div class="col-md-4">
+            <label for="inputHouseNumber"
+              class="form-label">House Number</label>
+            <input type="number"
+              class="form-control"
+              id="inputHouseNumber"
+              name="inputHouseNumber"
+              value="<%- data ? data.inputHouseNumber : "" %>" />
+          </div>
+          <div class="col-md-8">
+            <label for="inputStreet"
+              class="form-label">Street</label>
+            <input type="text"
+              class="form-control"
+              id="inputStreet"
+              name="inputStreet"
+              value="<%- data ? data.inputStreet : "" %>" />
+          </div>
+          <div class="col-md-5">
+            <label for="inputCity"
+              class="form-label">City</label>
+            <input type="text"
+              class="form-control"
+              id="inputCity"
+              name="inputCity"
+              value="<%- data ? data.inputCity : "" %>" />
+          </div>
+          <div class="col-md-4">
+            <label for="inputProvince"
+              class="form-label">Province</label>
+            <input type="text"
+              class="form-control"
+              id="inputProvince"
+              name="inputProvince"
+              value="<%- data ? data.inputProvince : "" %>" />
+          </div>
+          <div class="col-md-3">
+            <label for="inputPostalCode"
+              class="form-label">Postal Code</label>
+            <input type="text"
+              class="form-control"
+              id="inputPostalCode"
+              name="inputPostalCode"
+              value="<%- data ? data.inputPostalCode : "" %>" />
+          </div>
+          <!-- Divider-->
+          <hr class="my-4" />
+          <!-- Car details -->
+          <h2>Car details</h2>
+          <div class="col-md-6">
+            <label for="inputCarMake"
+              class="form-label">Make</label>
+            <input type="text"
+              class="form-control"
+              id="inputCarMake"
+              name="inputCarMake"
+              value="<%- data ? data.inputCarMake : "" %>" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCarModel"
+              class="form-label">Model</label>
+            <input type="text"
+              class="form-control"
+              id="inputCarModel"
+              name="inputCarModel"
+              value="<%- data ? data.inputCarModel : "" %>" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCarYear"
+              class="form-label">Year</label>
+            <input type="number"
+              class="form-control"
+              id="inputCarYear"
+              name="inputCarYear"
+              value="<%- data ? data.inputCarYear : "" %>" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCarPlatNumber"
+              class="form-label">Plat Number</label>
+            <input type="number"
+              class="form-control"
+              id="inputCarPlatNumber"
+              name="inputCarPlatNumber"
+              value="<%- data ? data.inputCarPlatNumber : "" %>" />
+          </div>
+          <div class="col-md-12">
+            <label for="inputCarLicenceNumber"
+              class="form-label">Licence Number</label>
+            <input type="text"
+              class="form-control"
+              id="inputCarLicenceNumber"
+              placeholder="Must be 8 characters (alphanumeric)"
+              name="inputCarLicenceNumber"
+              value="<%- data ? data.inputCarLicenceNumber : "" %>" />
+          </div>
+          <!-- Divider-->
+          <hr class="my-4" />
+          <!-- insert images -->
+          <div class="col-md-6">
+            <label for="image1"
+              class="form-label">Image 1</label>
+            <input type="file"
+              class="form-control"
+              id="image1"
+              name="image1" />
+          </div>
+          <div class="col-md-6">
+            <label for="image2"
+              class="form-label">Image 2</label>
+            <input type="file"
+              class="form-control"
+              id="image2"
+              name="image2" />
+          </div>
+          <div class="col-12">
+            <button type="submit"
+              class="btn btn-primary"
+              data-aos="flip-up">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+
+  <div id="serverTime"
+    style="display:none"><%= serverTime %></div>
+  <div class="custom-alerts">
+    <!-- Validation Errors -->
+    <% if( errors != null && errors.length > 0 ) { %>
+    <% for( var i = 0; i < errors.length; i++ ) { %>
+    <div class="custom-alert-red">
+      <span class="closebtn"
+        onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Server:</strong> <%= errors[i] %>
+    </div>
+    <% } %>
+    <% } %>
+    <!-- Server Messages -->
+    <% if( serverMsgs != null && serverMsgs.length > 0 ) { %>
+    <% for( var i = 0; i < serverMsgs.length; i++ ) { %>
+    <div class="custom-alert-yellow">
+      <span class="closebtn"
+        onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Server:</strong> <%= serverMsgs[i] %>
+    </div>
+    <% } %>
+    <% } %>
+  </div>
+
+  <%- include ('../layouts/footer.ejs'); -%>
+  <%- include ('../layouts/scripts.ejs'); -%>
+  <!-- <script src="/js/activate-btn.js"></script> -->
+  <% if( !appointmentDetail && driver ) { %>
+  <!-- datepicker setup requires input element with server time as value -->
+  <script src="/js/datepicker-init.js"></script>
+
+  <script>
+
+    // form submission for creating appointment slot
+    const form = document.querySelector( 'form.bookAppointment' )
+    form.addEventListener( 'submit', event => {
+      // submit event detected
+      event.preventDefault()
+
+      // picker.viewDate is the selected date in date picker
+      const calDate = picker.viewDate
+
+      // Create an input element for appointment date
+      var AD1 = document.createElement( "input" )
+      AD1.setAttribute( "type", "text" )
+      AD1.setAttribute( "name", "appointmentDate" )
+      AD1.setAttribute( "value", `${ calDate.getMonth() + 1 }/${ calDate.getDate() }/${ calDate.getFullYear() }` )
+      AD1.style.display = "none"
+
+      // Create an input element for appointment type G2/G
+      var AD2 = document.createElement( "input" )
+      AD2.setAttribute( "type", "text" )
+      AD2.setAttribute( "name", "appointmentType" )
+      AD2.setAttribute( "value", "G2" )
+      AD2.style.display = "none"
+
+      // Append the appointment date input to the form
+      form.appendChild( AD1 )
+      form.appendChild( AD2 )
+      form.submit()
+
+      AD.remove()
+    } )
+
+
+    // appointment slot logic
+    // these radio buttons are displayed when the appointment slots exist
+    const aptTimeRadioButtons = document.getElementsByName( "appointmentTime" )
+
+    // success, fail, handleResponseError functions for fetch api reteiving appointment timings for selected date 
+    const handleResponseError = ( response ) => {
+      if( !response.ok ) {
+        //response.ok is true even when url in wrong format i.e. response body not as expected
+        throw response.status + ": " + response.statusText
+      }
+      return response.json()
+    }
+
+    const fail = ( error ) => {
+      console.log( "Unable to make a request to API " + error )
+      alert( "Unable to retrieve appointment slots from API" )
+    }
+
+    const succeed = ( data ) => {
+      aptTimeRadioButtons.forEach( rb => {
+        data.appointment.forEach( apt => {
+          if( apt.isTimeSlotAvailable )
+            if( rb.value === apt.appointmentTime )
+              rb.removeAttribute( 'disabled' )
+        } )
+      } )
+    }
+
+    // fired when a date is selected on the datepicker - gets appointments times for the day
+    picker.subscribe( tempusDominus.Namespace.events.change, ( e ) => {
+      // radio buttons may have been enabled from previous event triggered
+      aptTimeRadioButtons.forEach( rb => {
+        rb.setAttribute( 'disabled', true )
+      } )
+
+      const selectedDate = e.date.toLocaleString( 'en', {
+        timeZone: 'America/Toronto'
+      } ).split( ',' )[ 0 ]
+
+      const url = window.location.origin + `/admins/appointments/${ selectedDate }`
+      fetch( url )
+        .then( ( response ) => handleResponseError( response ) )
+        .then( ( data ) => succeed( data ) )
+        .catch( ( error ) => fail( error ) )
+    } )
+
+
+    // displaying radio buttons for appointments available for current day on page load
+    const presentDate = new Date( picker.viewDate ).toLocaleString( 'en', {
+      timeZone: 'America/Toronto'
+    } ).split( ',' )[ 0 ]
+    const url = window.location.origin + `/admins/appointments/${ presentDate }`
+    fetch( url )
+      .then( ( response ) => handleResponseError( response ) )
+      .then( ( data ) => succeed( data ) )
+      .catch( ( error ) => fail( error ) )
+
+
+    // disabling radio buttons with time less than new Date( minDateText )
+    const serverTime = new Date( document.getElementById( "serverTime" ).textContent )
+    const serverTimeFormatted = `0${ serverTime.getHours() }:${ serverTime.getMinutes() }`
+    aptTimeRadioButtons.forEach( rb => {
+      if( rb.value < serverTimeFormatted ) {
+        rb.setAttribute( 'disabled', true )
+      }
+    } )
+  </script>
+  <% } %>
+
+  <% if( appointmentDetail && appointmentType === "G2" ) { %>
+  <script src="/js/digital-clock-display.js"></script>
+  <% } %>
+</body>
+
+</html>
