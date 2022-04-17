@@ -35,30 +35,39 @@
           Filter by:
         </div>
         <div class="col-auto text-center text-xl-end">
-          <form id="filterForm"
-            action="/examiners/fetchAppointments/"
-            method="get">
-            <div class="btn-group"
-              role="group"
-              aria-label="Basic example">
-              <input type="radio"
-                class="btn-check"
-                name="filterType"
-                value="G2"
-                id="byG2"
-                autocomplete="off">
-              <label class="btn btn-outline-success"
-                for="byG2">G2</label>
-              <input type="radio"
-                class="btn-check"
-                name="filterType"
-                value="G"
-                id="byG"
-                autocomplete="off">
-              <label class="btn btn-outline-success"
-                for="byG">G</label>
-            </div>
-          </form>
+          <div class="btn-group"
+            role="group"
+            aria-label="Basic example">
+            <input onclick="window.location='/examiners/fetchAppointments/G2';"
+              type="radio"
+              class="btn-check"
+              name="filterType"
+              value="G2"
+              id="byG2"
+              autocomplete="off"
+              <%= filteredBy == "G2" ? 'checked' : '' %>>
+            <label class="btn btn-outline-success"
+              for="byG2">G2</label>
+            <input onclick="window.location='/examiners/fetchAppointments/G';"
+              type="radio"
+              class="btn-check"
+              name="filterType"
+              value="G"
+              id="byG"
+              autocomplete="off"
+              <%= filteredBy == "G" ? 'checked' : '' %>>
+            <label class="btn btn-outline-success"
+              for="byG">G</label>
+            <input onclick="window.location='/examiners/appointments-page';"
+              type="radio"
+              class="btn-check"
+              name="filterType"
+              id="byNone"
+              autocomplete="off"
+              <%= filteredBy ? '' : 'checked' %>>
+            <label class="btn btn-outline-success"
+              for="byNone">None</label>
+          </div>
         </div>
       </div>
 
@@ -155,16 +164,16 @@
   <%- include ('../layouts/footer.ejs'); -%>
   <%- include ('../layouts/scripts.ejs'); -%>
   <script>
-    document.addEventListener( 'DOMContentLoaded', () => {
-      const filterForm = document.getElementById( "filterForm" )
+    // document.addEventListener( 'DOMContentLoaded', () => {
+    //   const filterForm = document.getElementById( "filterForm" )
 
-      document.getElementsByName( "filterType" ).forEach( btn => {
-        btn.addEventListener( "click", function() {
-          console.log( "clicked" )
-          filterForm.submit()
-        } )
-      } )
-    } )
+    //   document.getElementsByName( "filterType" ).forEach( btn => {
+    //     btn.addEventListener( "click", function() {
+    //       console.log( "clicked" )
+    //       filterForm.submit()
+    //     } )
+    //   } )
+    // } )
   </script>
 </body>
 
