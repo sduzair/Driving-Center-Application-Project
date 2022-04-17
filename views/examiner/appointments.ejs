@@ -27,74 +27,135 @@
   </header>
 
   <!-- Main Content-->
+  <div class="container mb-5">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-xl-11 col-12 text-center text-xl-end">Sort by:</div>
+        <div class="col-xl-1 col-12 text-center text-xl-end">
+          <div class="btn-group"
+            role="group"
+            aria-label="Basic example">
+            <input type="radio"
+              class="btn-check"
+              name="options-outlined"
+              id="success-outlined1"
+              autocomplete="off">
+            <label class="btn btn-outline-success"
+              for="success-outlined1">G2</label>
+            <input type="radio"
+              class="btn-check"
+              name="options-outlined"
+              id="success-outlined2"
+              autocomplete="off">
+            <label class="btn btn-outline-success"
+              for="success-outlined2">G</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container-fluid mb-5">
     <div class="row gx-4 mx-5">
-      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <% for(var i = 0; i < driversObj.length; i++) { %>
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <div class="card user-card-full">
           <div class="row m-l-0 m-r-0">
             <div class="col-sm-4 bg-c-lite-green user-profile">
               <div class="card-block text-center text-white">
-                <div> <img src="https://img.icons8.com/bubbles/100/000000/user.png"
+                <div> <img src="/assets<%- driversObj[i].image1 %>"
                     class="img-radius"
-                    alt="User-Profile-Image"> </div>
+                    alt="User-Profile-Image"
+                    onerror="this.onerror=null;this.src='https://img.icons8.com/bubbles/100/000000/user.png';"> </div>
               </div>
             </div>
             <div class="col-sm-8">
-              <div class="card-block mt-3">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <p class="f-w-600">Email</p>
-                    <h6 class="text-muted f-w-400">rntng@gmail.com</h6>
+              <div class="row">
+                <div class="card-block">
+                  <div class="row justify-content-between">
+                    <div class="col-sm-5 mx-2">
+                      <p class="row">Name:</p>
+                      <h6 class="row mx-1"><%- driversObj[i].firstName %> <%- driversObj[i].lastName %> </h6>
+                    </div>
+                    <div class="col-sm-5 mx-2">
+                      <p class="row">Test:</p>
+                      <h6 class="row mx-1"><%- driversObj[i].appointmentType %></h6>
+                    </div>
+                    <div class="col-sm-5 mx-2">
+                      <p class="row">Time:</p>
+                      <h6 class="row mx-1"><%- driversObj[i].appointmentID.appointmentTime %></h6>
+                    </div>
+                    <div class="col-sm-5 mx-2">
+                      <p class="row">Date:</p>
+                      <h6 class="row mx-1"><%- driversObj[i].appointmentID.appointmentDate %></h6>
+                    </div>
+                    <div class="col-sm-5 mx-2">
+                      <p class="row">Car Make:</p>
+                      <h6 class="row mx-1"><%- driversObj[i].carMake %></h6>
+                    </div>
+                    <div class="col-sm-5 mx-2">
+                      <p class="row">Plate Number:</p>
+                      <h6 class="row mx-1"><%- driversObj[i].carPlatNumber %></h6>
+                    </div>
                   </div>
-                  <div class="col-sm-6">
-                    <p class="f-w-600">Phone</p>
-                    <h6 class="text-muted f-w-400">98979989898</h6>
-                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center justify-content-sm-end m-auto">
+                <div class="col-4 col-sm-4 justify-content-center ">
+                  <button class="btn btn-primary">Grade</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <% } %>
+
+
+
     </div>
   </div>
-
   <%- include ('../components/custom-alerts.ejs'); -%>
 
   <%- include ('../layouts/footer.ejs'); -%>
   <%- include ('../layouts/scripts.ejs'); -%>
-  <script>
-    const handleResponseError = ( response ) => {
-      if( !response.ok ) {
-        //response.ok is true even when url in wrong format i.e. response body not as expected
-        throw response.status + ": " + response.statusText
+  <!-- <script>
+    document.addEventListener( 'DOMContentLoaded', () => {
+      console.log( driversObj )
+      const handleResponseError = ( response ) => {
+        if( !response.ok ) {
+          //response.ok is true even when url in wrong format i.e. response body not as expected
+          throw response.status + ": " + response.statusText
+        }
+        return response.json()
       }
-      return response.json()
-    }
 
-    const fail = ( error ) => {
-      console.log( "Unable to make a request to API " + error )
-      alert( "Unable to retrieve driver appointment details from API" )
-    }
+      const fail = ( error ) => {
+        console.log( "Unable to make a request to API " + error )
+        alert( "Unable to retrieve driver appointment details from API" )
+      }
 
-    const succeed = ( data ) => {
-      console.log( data )
-      // aptTimeRadioButtons.forEach( rb => {
-      //   data.appointment.forEach( apt => {
-      //     if( apt.isTimeSlotAvailable )
-      //       if( rb.value === apt.appointmentTime )
-      //         rb.removeAttribute( 'disabled' )
-      //   } )
-      // } )
-    }
-    const driverType = "G"
-    const url = window.location.origin + `/examiners/fetchAppointments/${ driverType }`
-    console.log( url )
-    fetch( url )
-      .then( ( response ) => handleResponseError( response ) )
-      .then( ( data ) => succeed( data ) )
-      .catch( ( error ) => fail( error ) )
-  </script>
+      const succeed = ( data ) => {
+        data.forEach( driver => {
+          // console.log( driver )
+          const { firstName, lastName, appointmentType, carMake, carModel, carPlatNumber, image1, userID } = driver
+        } )
+        // aptTimeRadioButtons.forEach( rb => {
+        //   data.appointment.forEach( apt => {
+        //     if( apt.isTimeSlotAvailable )
+        //       if( rb.value === apt.appointmentTime )
+        //         rb.removeAttribute( 'disabled' )
+        //   } )
+        // } )
+      }
+      const driverType = "G"
+      const url = window.location.origin + `/examiners/fetchAppointments/${ driverType }`
+      console.log( url )
+      fetch( url )
+        .then( ( response ) => handleResponseError( response ) )
+        .then( ( data ) => succeed( data ) )
+        .catch( ( error ) => fail( error ) )
+    } )
+  </script> -->
 </body>
 
 </html>

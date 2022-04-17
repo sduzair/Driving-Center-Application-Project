@@ -41,9 +41,6 @@ body {
   /* padding: 20px 0 */
 }
 
-.card-block {
-  padding: 0.5rem
-}
 
 .m-b-25 {
   margin-bottom: 25px
@@ -54,19 +51,11 @@ body {
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
-  .img-radius {
-    width: 50%;
-  }
-}
 
 h6 {
   font-size: 14px
 }
 
-.card .card-block p {
-  /* line-height: 25px */
-}
 
 @media only screen and (min-width: 1400px) {
   p {
@@ -74,9 +63,6 @@ h6 {
   }
 }
 
-.card-block {
-  padding: 0.5rem
-}
 
 .b-b-default {
   border-bottom: 1px solid #e0e0e0
@@ -91,9 +77,7 @@ h6 {
 }
 
 .card .card-block p {
-  line-height: 1rem;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .m-b-10 {
@@ -101,7 +85,8 @@ h6 {
 }
 
 .text-muted {
-  color: #919aa3 !important
+  color: #919aa3 !important;
+  margin-bottom: 1.5rem;
 }
 
 .b-b-default {
