@@ -33,7 +33,7 @@ const driverAuthentication = require( "./middleware/driverAuthentication" )
 const redirectIfAuthenticated = require( "./middleware/redirectIfAuthenticated" )
 const adminAuthentication = require( "./middleware/adminAuthentication" )
 const adminDriverAuthentication = require( "./middleware/driverAdminAuthentication" )
-
+const examinerAuthentication = require( "./middleware/examinerAuthentication" )
 //importing controllers
 const driverUpdate = require( "./controllers/driverUpdate" )
 const driverFetch = require( "./controllers/driverFetch" )
@@ -52,7 +52,9 @@ const pageAdminAppointment = require( "./controllers/pageAdminAppointment" )
 const appointmentNew = require( "./controllers/appointmentNew" )
 const appointmentsFetch = require( "./controllers/appointmentsFetch" )
 const driverBookAppointment = require( "./controllers/driverBookAppointment" )
-
+const pageExaminer = require( "./controllers/pageExaminer" )
+const examinerFetchByType = require( "./controllers/examinerFetchByType" )
+const driverFeedbackUpdate = require( "./controllers/driverFeedbackUpdate" )
 const app = express()
 app.set( "view engine", "ejs" )
 app.use( express.static( "public" ) )
@@ -132,10 +134,12 @@ app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
 
 app.post( "/drivers/bookAppointment", driverAuthentication, driverBookAppointment )
 
+app.get("/examiner/page", examinerAuthentication, pageExaminer)
+app.get("/examiners/fetch/:type", /*examinerAuthentication,*/ examinerFetchByType)
+app.post("/examiner/update/driver/feedback", /*examinerAuthentication,*/driverFeedbackUpdate)
 
-// Assignment 4 - Day 2
-// app.post( "/admin/appointments", adminAuthentication, postAppoinments )
-// this middleware like route directs user to not found page after express goes through all the routes
+
+
 app.use( ( req, res ) => res.render( 'notfound' ) )
 
 app.listen( PORT, () => {

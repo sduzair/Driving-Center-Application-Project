@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('../layouts/header'); -%>
+
+<body>
+  <!-- Navigation-->
+  <%- include ('../layouts/nav'); -%>
+  <!-- Page Header-->
+  <header class="masthead"
+    style="background-image: url('/assets/mastheadImages/chuttersnap-hmWcrTxvAk0-unsplash.jpg');">
+    <div class="container position-relative px-8 px-lg-8">
+      <div class="row gx-6 gx-lg-8 justify-content-center">
+        <div class="col-md-10 col-lg-10 col-xl-10">
+          <div class="site-heading">
+            <h1>Welcome to Examiner Page</h1>
+            <span class="subheading">Register for a test</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content-->
+  <div class="container mb-5">
+    <div class="row gx-4 mx-5">
+      <h1 class="text-center">DO something about me</h1>
+    </div>
+  </div>
+
+
+
+  <div class="custom-alerts">
+
+    <div class="custom-alert-yellow">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Warning!</strong> This is a warning alert—check it out!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <%- include ('../layouts/footer.ejs'); -%>
+  <%- include ('../layouts/scripts.ejs'); -%>
+</body>
+
+</html>

@@ -138,6 +138,15 @@
             href="/admins/appointment-page">Create Appointment</a>
         </li>
         <% } %>
+          <% if(loggedIn == 'Examiner') { %>
+            <li class="nav-item"
+                data-aos="fade-left">
+              <a class="nav-link px-lg-3 py-3 py-lg-4"
+                 href="/examiner/page">Examiner</a>
+            </li>
+
+          <% } %>
+
         <% if (loggedIn) { %>
         <li class="nav-item"
           data-aos="fade-left">

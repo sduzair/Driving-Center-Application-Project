@@ -25,4 +25,17 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         scrollPos = currentTop;
     });
+
+    $("#gOrG2").on('click', function () {
+        $.ajax(`/examiners/fetch/${ $("#gOrG2").val()}`, {
+            type: 'GET',  // http method
+            success: function (data, status, xhr) {
+                // success callback function
+
+            },
+            error: function (errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+    });
 })

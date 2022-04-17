@@ -76,6 +76,12 @@ const DriverSchema = new mongoose.Schema( {
   },
   appointmentType: {
     type: String
+  },
+  examinerComment: {
+    type: String
+  },
+  testResult: {
+    type: Boolean
   }
 } )
 
