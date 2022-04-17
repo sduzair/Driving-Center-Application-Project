@@ -9,7 +9,6 @@ module.exports = function( req, res ) {
                     errors: [ "error retrieving driver appointments" ],
                     serverMsgs: null,
                     driversObj: null,
-                    filteredBy: type,
                 } )
             }
             // res.status( 404 ).json( driversObj )
