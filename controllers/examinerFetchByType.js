@@ -1,19 +1,15 @@
 const Driver = require("../models/Driver")
 
-module.exports = async function readDriverDetails(req, res) {
+module.exports = function (req, res) {
     const {type} = req.params
-    Driver.find({appointmentType: type})
-        .populate("appointmentID")
+    Driver.find({appointmentType: type, appointmentID: {$ne:null}})
+        .populate("appointmentID", {match: {isTimeSlotAvailable: false}})
         .exec((error, driverObj) => {
-            console.log(error)
-            console.log(driverObj)
             if (error || !driverObj || driverObj.length === 0) {
-                console.log("error")
-                res.status(404).json({"message": "Driver not found"})
-            } else {
-                console.log("success")
-                res.status(200).json(driverObj)
+                return res.status(404).json({"message": "Driver not found"})
             }
+            res.status(200).json(driverObj)
+
         })
 }
 
