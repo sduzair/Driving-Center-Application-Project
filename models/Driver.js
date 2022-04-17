@@ -74,6 +74,7 @@ const DriverSchema = new mongoose.Schema( {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Appointment"
   },
+  // "G" or "G2"
   appointmentType: {
     type: String
   },

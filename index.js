@@ -52,8 +52,7 @@ const pageAdminAppointment = require( "./controllers/pageAdminAppointment" )
 const appointmentNew = require( "./controllers/appointmentNew" )
 const appointmentsFetch = require( "./controllers/appointmentsFetch" )
 const driverBookAppointment = require( "./controllers/driverBookAppointment" )
-const pageExaminer = require( "./controllers/pageExaminer" )
-const examinerFetchByType = require( "./controllers/examinerFetchByType" )
+const pageExaminerDashboard = require( "./controllers/pageExaminerDashboard" )
 const driverFeedbackUpdate = require( "./controllers/driverFeedbackUpdate" )
 const app = express()
 app.set( "view engine", "ejs" )
@@ -134,9 +133,13 @@ app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
 
 app.post( "/drivers/bookAppointment", driverAuthentication, driverBookAppointment )
 
-app.get("/examiner/page", examinerAuthentication, pageExaminer)
-app.get("/examiners/fetch/:type", /*examinerAuthentication,*/ examinerFetchByType)
-app.post("/examiner/update/driver/feedback", /*examinerAuthentication,*/driverFeedbackUpdate)
+app.get( "/examiners/dashboard", examinerAuthentication, pageExaminerDashboard )
+
+app.get( "/examiners/appointments-page", examinerAuthentication, require( "./controllers/pageAppointments" ) )
+
+app.get( "/examiners/fetchAppointments/:type", /*examinerAuthentication,*/ require( "./controllers/examinerFetchByAptType" ) )
+
+app.post( "/examiners/update/driver/feedback", /*examinerAuthentication,*/driverFeedbackUpdate )
 
 
 
