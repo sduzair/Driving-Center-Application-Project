@@ -1,7 +1,7 @@
 const Driver = require( "../models/Driver" )
 
 module.exports = function( req, res ) {
-    const { filterType } = req.params
+    const filterType  = req.query.filterType
     Driver.find( { appointmentType: filterType, appointmentID: { $ne: null } } )
         .populate( "appointmentID", { match: { isTimeSlotAvailable: false } } )
         .exec( ( error, driversObj ) => {
@@ -13,7 +13,7 @@ module.exports = function( req, res ) {
                     filteredBy: filterType,
                 } )
             }
-            // res.status( 404 ).json( driversObj )
+            // res.status( 200 ).json( driversObj )
             res.render( "examiner/appointments", {
                 errors: null,
                 serverMsgs: null,
