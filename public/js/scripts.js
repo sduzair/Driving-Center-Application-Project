@@ -3,39 +3,26 @@
 * Copyright 2013-2021 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE)
 */
-window.addEventListener('DOMContentLoaded', () => {
-    let scrollPos = 0;
-    const mainNav = document.getElementById('mainNav');
-    const headerHeight = mainNav.clientHeight;
-    window.addEventListener('scroll', function() {
-        const currentTop = document.body.getBoundingClientRect().top * -1;
-        if ( currentTop < scrollPos) {
+window.addEventListener( 'DOMContentLoaded', () => {
+    let scrollPos = 0
+    const mainNav = document.getElementById( 'mainNav' )
+    const headerHeight = mainNav.clientHeight
+    window.addEventListener( 'scroll', function() {
+        const currentTop = document.body.getBoundingClientRect().top * -1
+        if( currentTop < scrollPos ) {
             // Scrolling Up
-            if (currentTop > 0 && mainNav.classList.contains('is-fixed')) {
-                mainNav.classList.add('is-visible');
+            if( currentTop > 0 && mainNav.classList.contains( 'is-fixed' ) ) {
+                mainNav.classList.add( 'is-visible' )
             } else {
-                mainNav.classList.remove('is-visible', 'is-fixed');
+                mainNav.classList.remove( 'is-visible', 'is-fixed' )
             }
         } else {
             // Scrolling Down
-            mainNav.classList.remove(['is-visible']);
-            if (currentTop > headerHeight && !mainNav.classList.contains('is-fixed')) {
-                mainNav.classList.add('is-fixed');
+            mainNav.classList.remove( [ 'is-visible' ] )
+            if( currentTop > headerHeight && !mainNav.classList.contains( 'is-fixed' ) ) {
+                mainNav.classList.add( 'is-fixed' )
             }
         }
-        scrollPos = currentTop;
-    });
-
-    $("#gOrG2").on('click', function () {
-        $.ajax(`/examiners/fetch/${ $("#gOrG2").val()}`, {
-            type: 'GET',  // http method
-            success: function (data, status, xhr) {
-                // success callback function
-
-            },
-            error: function (errorMessage) {
-                console.log(errorMessage);
-            }
-        });
-    });
-})
+        scrollPos = currentTop
+    } )
+} )
