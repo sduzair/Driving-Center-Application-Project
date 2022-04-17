@@ -131,11 +131,13 @@ app.post( "/admins/appointments", adminAuthentication, appointmentNew )
 
 app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
 
+app.get( "/admins/appointments-page", /*adminAuthentication,*/ require( "./controllers/adminAppointmentView" ) )
+
 app.post( "/drivers/bookAppointment", driverAuthentication, driverBookAppointment )
 
 app.get( "/examiners/dashboard", examinerAuthentication, pageExaminerDashboard )
 
-app.get( "/examiners/appointments-page", examinerAuthentication, require( "./controllers/pageAppointments" ) )
+app.get( "/examiners/appointments-page", /*examinerAuthentication,*/ require( "./controllers/pageAppointments" ) )
 
 app.get( "/examiners/fetchAppointments/:type", /*examinerAuthentication,*/ require( "./controllers/examinerFetchByAptType" ) )
 
