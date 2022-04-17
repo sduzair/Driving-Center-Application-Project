@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('../layouts/header'); -%>
+
+<head>
+  <!-- Animate on scroll @dep: two script elements -->
+  <link href="/css/user-profiles.css"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigation-->
+  <%- include ('../layouts/nav'); -%>
+  <!-- Page Header-->
+  <header class="masthead"
+    style="background-image: url('/assets/mastheadImages/chuttersnap-hmWcrTxvAk0-unsplash.jpg');">
+    <div class="container position-relative px-8 px-lg-8">
+      <div class="row gx-6 gx-lg-8 justify-content-center">
+        <div class="col-md-10 col-lg-10 col-xl-10">
+          <div class="site-heading">
+            <h1>Appointments</h1>
+            <span class="subheading">View appointment details of drivers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content-->
+  <div class="container-fluid mb-5">
+    <div class="row gx-4 mx-5">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card user-card-full">
+          <div class="row m-l-0 m-r-0">
+            <div class="col-sm-4 bg-c-lite-green user-profile">
+              <div class="card-block text-center text-white">
+                <div> <img src="https://img.icons8.com/bubbles/100/000000/user.png"
+                    class="img-radius"
+                    alt="User-Profile-Image"> </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="card-block mt-3">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="f-w-600">Email</p>
+                    <h6 class="text-muted f-w-400">rntng@gmail.com</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="f-w-600">Phone</p>
+                    <h6 class="text-muted f-w-400">98979989898</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include ('../components/custom-alerts.ejs'); -%>
+
+  <%- include ('../layouts/footer.ejs'); -%>
+  <%- include ('../layouts/scripts.ejs'); -%>
+  <script>
+    const handleResponseError = ( response ) => {
+      if( !response.ok ) {
+        //response.ok is true even when url in wrong format i.e. response body not as expected
+        throw response.status + ": " + response.statusText
+      }
+      return response.json()
+    }
+
+    const fail = ( error ) => {
+      console.log( "Unable to make a request to API " + error )
+      alert( "Unable to retrieve driver appointment details from API" )
+    }
+
+    const succeed = ( data ) => {
+      console.log( data )
+      // aptTimeRadioButtons.forEach( rb => {
+      //   data.appointment.forEach( apt => {
+      //     if( apt.isTimeSlotAvailable )
+      //       if( rb.value === apt.appointmentTime )
+      //         rb.removeAttribute( 'disabled' )
+      //   } )
+      // } )
+    }
+    const driverType = "G"
+    const url = window.location.origin + `/examiners/fetchAppointments/${ driverType }`
+    console.log( url )
+    fetch( url )
+      .then( ( response ) => handleResponseError( response ) )
+      .then( ( data ) => succeed( data ) )
+      .catch( ( error ) => fail( error ) )
+  </script>
+</body>
+
+</html>
