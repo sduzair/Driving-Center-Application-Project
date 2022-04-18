@@ -5,7 +5,6 @@ module.exports = function( req, res ) {
   Driver.find( { appointmentID: { $ne: null }, testResult: null }, " firstName lastName appointmentType carMake carModel carPlatNumber image1 userID", )
     .populate( "appointmentID", { match: { isTimeSlotAvailable: false } } )
     .exec( ( error, driversObj ) => {
-      console.log( driversObj )
       if( error || !driversObj || driversObj.length === 0 ) {
         res.render( "examiner/appointments", {
           errors: [ "error retrieving driver appointments" ],
