@@ -3,120 +3,120 @@ const bcrypt = require( "bcryptjs" )
 
 
 const DriverSchema = new mongoose.Schema( {
-    firstName: {
-        required: [ true, 'Please provide first name' ],
-        type: String,
+  firstName: {
+    required: [ true, 'Please provide first name' ],
+    type: String,
+  },
+  lastName: {
+    required: [ true, 'Please provide last name' ],
+    type: String,
+  },
+  userID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  DOB: {
+    required: [ true, 'Please provide date of birth' ],
+    type: String,
+  },
+  address: {
+    houseNumber: {
+      required: [ true, 'Please provide house number' ],
+      type: Number,
     },
-    lastName: {
-        required: [ true, 'Please provide last name' ],
-        type: String,
+    street: {
+      required: [ true, 'Please provide street' ],
+      type: String,
     },
-    userID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
+    city: {
+      required: [ true, 'Please provide city' ],
+      type: String,
     },
-    DOB: {
-        required: [ true, 'Please provide date of birth' ],
-        type: String,
+    province: {
+      required: [ true, 'Please provide province' ],
+      type: String,
     },
-    address: {
-        houseNumber: {
-            required: [ true, 'Please provide house number' ],
-            type: Number,
-        },
-        street: {
-            required: [ true, 'Please provide street' ],
-            type: String,
-        },
-        city: {
-            required: [ true, 'Please provide city' ],
-            type: String,
-        },
-        province: {
-            required: [ true, 'Please provide province' ],
-            type: String,
-        },
-        postalCode: {
-            required: [ true, 'Please provide postal code' ],
-            type: String,
-        },
+    postalCode: {
+      required: [ true, 'Please provide postal code' ],
+      type: String,
+    },
 
+  },
+  carMake: {
+    required: [ true, 'Please provide car make' ],
+    type: String,
+  },
+  carModel: {
+    required: [ true, 'Please provide car model' ],
+    type: String,
+  },
+  carYear: {
+    required: [ true, 'Please provide car year' ],
+    type: Number,
+  },
+  carPlatNumber: {
+    required: [ true, 'Please provide car plate number' ],
+    type: Number,
+  },
+  carLicenceNumber: {
+    type: String,
+    required: [ true, 'Please provide car licence number' ],
+  },
+  image1: {
+    required: [ true, 'Please provide image 1' ],
+    type: String,
+  },
+  image2: {
+    required: [ true, 'Please provide image 2' ],
+    type: String,
+  },
+  appointmentID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Appointment"
+  },
+  // "G" or "G2"
+  appointmentType: {
+    type: String
+  },
+  examinerComment: {
+    type: String,
+    validate: {
+      validator: function( v ) {
+        return v ? true : false
+      },
+      message: 'Please provide examiner comment'
     },
-    carMake: {
-        required: [ true, 'Please provide car make' ],
-        type: String,
-    },
-    carModel: {
-        required: [ true, 'Please provide car model' ],
-        type: String,
-    },
-    carYear: {
-        required: [ true, 'Please provide car year' ],
-        type: Number,
-    },
-    carPlatNumber: {
-        required: [ true, 'Please provide car plate number' ],
-        type: Number,
-    },
-    carLicenceNumber: {
-        type: String,
-        required: [ true, 'Please provide car licence number' ],
-    },
-    image1: {
-        required: [ true, 'Please provide image 1' ],
-        type: String,
-    },
-    image2: {
-        required: [ true, 'Please provide image 2' ],
-        type: String,
-    },
-    appointmentID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Appointment"
-    },
-    // "G" or "G2"
-    appointmentType: {
-        type: String
-    },
-    examinerComment: {
-        type: String,
-        validate: {
-            validator: function( v ) {
-                return v ? true : false
-            },
-            message: 'Please provide examiner comment'
-        },
-    },
-    testResult: {
-        type: Boolean,
-        validate: {
-            validator: function( v ) {
-                return v !== null ? true : false
-            },
-            message: 'Please provide test result'
-        }
+  },
+  testResult: {
+    type: Boolean,
+    validate: {
+      validator: function( v ) {
+        return v !== null ? true : false
+      },
+      message: 'Please provide test result'
     }
+  }
 } )
 
 DriverSchema.pre( "save", function( next ) {
-    const driver = this
+  const driver = this
 
-    bcrypt.hash( driver.carLicenceNumber, 10, ( error, hash ) => {
-        driver.carLicenceNumber = hash
-        next()
-    } )
+  bcrypt.hash( driver.carLicenceNumber, 10, ( error, hash ) => {
+    driver.carLicenceNumber = hash
+    next()
+  } )
 
-    // bcrypt.hash(driver.DOB, 10, (error, hash) => {
-    // 	driver.DOB = hash
-    // 	next()
-    // })
+  // bcrypt.hash(driver.DOB, 10, (error, hash) => {
+  // 	driver.DOB = hash
+  // 	next()
+  // })
 } )
 
 
 DriverSchema.pre( 'findOneAndUpdate', function( next ) {
-    this.options.runValidators = true
-    next()
+  this.options.runValidators = true
+  next()
 } )
 
 const Driver = mongoose.model( "Driver", DriverSchema )
