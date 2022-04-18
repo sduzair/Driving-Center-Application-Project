@@ -79,10 +79,12 @@ const DriverSchema = new mongoose.Schema( {
     type: String
   },
   examinerComment: {
-    type: String
+    type: String,
+    required: function() { this.appointmentID ? true : false }
   },
   testResult: {
-    type: Boolean
+    type: Boolean,
+    required: function() { this.appointmentID ? true : false }
   }
 } )
 

@@ -37,10 +37,6 @@ body {
   background: linear-gradient(to right, #ee5a6f, #f29263)
 }
 
-.user-profile {
-  /* padding: 20px 0 */
-}
-
 
 .m-b-25 {
   margin-bottom: 25px
@@ -126,6 +122,10 @@ h6 {
   margin: 0 10px 0 0;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out
+}
+
+.small-font {
+  font-size: .875em;
 }
 
 /* ******************* Examiners driver appointments page - END  */

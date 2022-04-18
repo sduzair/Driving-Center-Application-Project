@@ -13,14 +13,14 @@ module.exports = function( req, res ) {
                     filteredBy: filterType,
                 } )
             }
-            res.status( 200 ).json( driversObj )
-            /*res.render( "examiner/appointments", {
+            // res.status( 200 ).json( driversObj )
+            res.render( "examiner/appointments", {
                 errors: null,
                 serverMsgs: null,
                 driversObj: driversObj,
                 filteredBy: filterType,
             } )
-*/
+
         } )
 }
 
