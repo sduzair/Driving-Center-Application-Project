@@ -90,27 +90,22 @@ const DriverSchema = new mongoose.Schema( {
   },
   testResult: {
     type: Boolean,
+    default: null,
     validate: {
       validator: function( v ) {
-        return v !== null ? true : false
+        return v ? true : false
       },
-      message: 'Please provide test result'
-    }
+      message: 'Please provide examiner result'
+    },
   }
 } )
 
 DriverSchema.pre( "save", function( next ) {
   const driver = this
-
   bcrypt.hash( driver.carLicenceNumber, 10, ( error, hash ) => {
     driver.carLicenceNumber = hash
     next()
   } )
-
-  // bcrypt.hash(driver.DOB, 10, (error, hash) => {
-  // 	driver.DOB = hash
-  // 	next()
-  // })
 } )
 
 
@@ -118,6 +113,7 @@ DriverSchema.pre( 'findOneAndUpdate', function( next ) {
   this.options.runValidators = true
   next()
 } )
+
 
 const Driver = mongoose.model( "Driver", DriverSchema )
 

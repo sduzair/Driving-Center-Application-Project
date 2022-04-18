@@ -29,7 +29,9 @@
   <div class="container-fluid mb-5">
     <div class="row gx-4 mx-5">
       <% if(driversObj) for(var i = 0; i < driversObj.length; i++) { %>
-      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"
+        data-aos="fade-in"
+        data-aos-delay="<%- (i % 2 == 0) ? "0" : "100" %>">
         <div class="card user-card-full">
           <div class="row m-l-0 m-r-0">
             <div class="col-sm-4 bg-c-lite-green user-profile">
