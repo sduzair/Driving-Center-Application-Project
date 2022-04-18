@@ -15,7 +15,6 @@ module.exports = function( req, res ) {
                 : [ "Unable to update examiner's feedback." ] )
 
         } else {
-            console.log( "Driver's examiner's feedback updated successfully" )
             req.flash( 'serverMsgs', [ "Examiner's feedback is updated successfully." ] )
         }
         res.redirect( "/examiners/appointments-page" )

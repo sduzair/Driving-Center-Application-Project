@@ -132,7 +132,7 @@ app.post( "/admins/appointments", adminAuthentication, appointmentNew )
 
 app.get( "/admins/appointments/:month/:day/:year", appointmentsFetch )
 
-app.get( "/admins/test-results-page", /*adminAuthentication,*/ require( "./controllers/pageTestResults" ) )
+app.get( "/admins/test-results-page", adminAuthentication, require( "./controllers/pageTestResults" ) )
 
 app.post( "/drivers/bookAppointment", driverAuthentication, driverBookAppointment )
 
@@ -142,7 +142,7 @@ app.get( "/examiners/appointments-page", /*examinerAuthentication,*/ require( ".
 
 app.get( "/examiners/fetchAppointments/:filterType", /*examinerAuthentication,*/ require( "./controllers/examinerFetchByAptType" ) )
 
-app.post( "/examiners/update/driver/feedback", /*examinerAuthentication,*/driverFeedbackUpdate )
+app.post( "/examiners/update/driver/feedback", /*examinerAuthentication,*/ driverFeedbackUpdate )
 
 
 
