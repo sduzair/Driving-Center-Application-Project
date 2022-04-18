@@ -35,7 +35,6 @@ const adminAuthentication = require( "./middleware/adminAuthentication" )
 const adminDriverAuthentication = require( "./middleware/driverAdminAuthentication" )
 const examinerAuthentication = require( "./middleware/examinerAuthentication" )
 //importing controllers
-const driverUpdate = require( "./controllers/driverUpdate" )
 const driverFetch = require( "./controllers/driverFetch" )
 const driverNew = require( "./controllers/driverNew" )
 const pageHome = require( "./controllers/home" )
@@ -97,7 +96,9 @@ mongoose.connect( "mongodb+srv://" + DB_USERNAME + ":" + DB_PASSWORD + "@sandbox
 
 // routing
 // driver authentication prevents any user other than 'Driver' from access
-app.post( "/drivers/updateDriver", driverAuthentication, driverUpdate )
+app.post( "/drivers/updateG2Driver", driverAuthentication, require( "./controllers/driverG2Update" ) )
+
+app.post( "/drivers/updateGDriver", driverAuthentication, require( "./controllers/driverGUpdate" ) )
 
 // app.post( "/driver/driver-details", driverAuthentication, driverFetch )
 

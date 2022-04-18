@@ -44,191 +44,19 @@
   <div class="container mb-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
 
-      <div class="col-md-6 col-lg-6 col-xl-6">
-        <form class="row g-3">
-          <!-- action="/driver/update-driver#province"
-          method="POST"> -->
-          <!-- User details -->
-          <h2 id="personal">Personal</h2>
-          <div class="col-md-6">
-            <label for="firstName"
-              class="form-label">First Name</label>
-            <input type="text"
-              class="form-control"
-              id="firstName"
-              name="firstName"
-              readonly
-              value="<%= driver.firstName%>"></input>
-          </div>
-          <div class="col-md-6">
-            <label for="lastName"
-              class="form-label">Last Name</label>
-            <input type="text"
-              class="form-control"
-              id="lastName"
-              name="lastName"
-              readonly
-              value="<%= driver.lastName%>" />
-          </div>
-          <div class="col-md-6">
-            <label for="userID"
-              class="form-label">User ID</label>
-            <input type="text"
-              class="form-control"
-              id="userID"
-              name="userID"
-              readonly
-              value="<%= driver.userID%>" />
-          </div>
-          <div class="col-md-6">
-            <label for="inputDOB"
-              class="form-label">Date of birth</label>
-            <input type="date"
-              class="form-control"
-              id="inputDOB"
-              name="inputDOB"
-              readonly
-              value="<%= driver.DOB %>" />
-          </div>
-          <!-- Divider-->
-          <hr class="my-4" />
-          <!-- Address -->
-          <h2>Address</h2>
-          <div class="col-md-4">
-            <label for="inputHouseNumber"
-              class="form-label">House Number</label>
-            <input type="number"
-              class="form-control"
-              id="inputHouseNumber"
-              name="inputHouseNumber"
-              readonly
-              value="<%= driver.address.houseNumber %>" />
-          </div>
-          <div class="col-md-8">
-            <label for="inputStreet"
-              class="form-label">Street</label>
-            <input type="text"
-              class="form-control"
-              id="inputStreet"
-              name="inputStreet"
-              readonly
-              value="<%= driver.address.street%>" />
-          </div>
-          <div class="col-md-5">
-            <label for="inputCity"
-              class="form-label">City</label>
-            <input type="text"
-              class="form-control"
-              id="inputCity"
-              name="inputCity"
-              readonly
-              value="<%= driver.address.city%>" />
-          </div>
-          <div class="col-md-4">
-            <label for="inputProvince"
-              class="form-label">Province</label>
-            <input type="text"
-              class="form-control"
-              id="inputProvince"
-              name="inputProvince"
-              readonly
-              value="<%= driver.address.province%>" />
-          </div>
-          <div class="col-md-3">
-            <label for="inputPostalCode"
-              class="form-label">Postal Code</label>
-            <input type="text"
-              class="form-control"
-              id="inputPostalCode"
-              name="inputPostalCode"
-              readonly
-              value="<%= driver.address.postalCode %>" />
-          </div>
-          <!-- Divider-->
-          <hr class="my-4" />
-          <!-- Car details -->
-          <h2>Car details</h2>
-          <div class="col-md-6">
-            <label for="inputCarMake"
-              class="form-label">Make</label>
-            <input type="text"
-              class="form-control"
-              id="inputCarMake"
-              name="inputCarMake"
-              readonly
-              value="<%= driver.carMake %>" />
-          </div>
-          <div class="col-md-6">
-            <label for="inputCarModel"
-              class="form-label">Model</label>
-            <input type="text"
-              class="form-control"
-              id="inputCarModel"
-              name="inputCarModel"
-              readonly
-              value="<%= driver.carModel %>" />
-          </div>
-          <div class="col-md-6">
-            <label for="inputCarYear"
-              class="form-label">Year</label>
-            <input type="number"
-              class="form-control"
-              id="inputCarYear"
-              name="inputCarYear"
-              readonly
-              value="<%= driver.carYear %>" />
-          </div>
-          <div class="col-md-6">
-            <label for="inputCarPlatNumber"
-              class="form-label">Plat Number</label>
-            <input type="number"
-              class="form-control"
-              id="inputCarPlatNumber"
-              name="inputCarPlatNumber"
-              readonly
-              value="<%= driver.carPlatNumber %>" />
-          </div>
-          <div class="col-md-12">
-            <label for="inputCarLicenceNumber"
-              class="form-label">Licence Number</label>
-            <input type="text"
-              class="form-control"
-              id="inputCarLicenceNumber"
-              placeholder="Must be 8 characters (alphanumeric)"
-              name="inputCarLicenceNumber"
-              value="<%= driver.carLicenceNumber %>"
-              readonly />
-          </div>
-          <!-- <div class="col-12">
-                  <button type="submit" class="btn btn-primary" id="btnUpdate" disabled>Update</button>
-                </div> -->
+      <div class="col-md-12 col-lg-6 col-xl-6">
+        <form class="row g-3 userDetails"
+          action="/drivers/updateGDriver#personal"
+          method="POST">
+          <%- include ('components/updateForm'); -%>
+
         </form>
-        <!-- Divider-->
       </div>
 
       <div class="col-md-6 col-lg-6 col-xl-6">
         <% if(appointmentDetail && appointmentType === "G") { %>
         <% if(testResult.testResult) { %>
-        <!--digital clock start-->
-
-        <h2>Result</h2>
-        <div
-          class="mx-auto mt-4 <%= testResult.testResult ? 'bg-success border-success datetime2' : 'bg-danger border-danger color-white datetime3' %> bg-gradient"
-          data-aos="zoom-out-up">
-          <div>
-            <span
-              class="time <%= testResult.testResult ? 'bg-success border-success' : 'bg-danger border-danger color-white' %>"><%- testResult.testResult ? 'Pass' : 'Fail'%></span>
-          </div>
-        </div>
-        <div class="mx-auto mt-4">
-          <h2>Examiner Comment:</h2>
-          <blockquote class="blockquote mx-auto d-flex justify-content-center">
-            <p class="lead ">
-              '<%= testResult.examinerComment %>'
-            </p>
-          </blockquote>
-        </div>
-        <!--digital clock end-->
+        <%- include ('components/testResultDisplay') %>
         <% } else if (!testResult.testResult) { %>
         <%- include ('components/appointmentsDisplay'); -%>
         <% } %>
@@ -238,163 +66,47 @@
 
         <% if( !appointmentDetail ) { %>
         <h2>Available Time Slots</h2>
-        <form class="bookAppointment"
-          action="/drivers/bookAppointment#inlinePicker"
-          method="POST">
-          <!-- DATE PICKER -->
-          <div class="calendar-container">
-            <div class="calendar-item">
-              <div class='log-event'
-                id='inlinePicker'>
-              </div>
-            </div>
-            <div class="btn-appointment-add-item">
-              <button type="submit"
-                id="btn-add-appointment"
-                class="btn btn-outline-primary"
-                data-aos="flip-up">Book appointment</button>
-            </div>
-            <div class="list-appointment-slots-item"
-              data-bs-toggle="tooltip"
-              title="Slots added by admin user are visible here">
-              <div class="btn-group appointment-slot-list">
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option1"
-                  autocomplete="off"
-                  value="09:00"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option1">09:00 - 09:30</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option2"
-                  autocomplete="off"
-                  value="09:30"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option2">09:30 - 10:00</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option3"
-                  autocomplete="off"
-                  value="10:00"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option3">10:00 - 10:30</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option4"
-                  autocomplete="off"
-                  value="10:30"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option4">10:30 - 11:00</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option5"
-                  autocomplete="off"
-                  value="11:00"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option5">11:00 - 11:30</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option6"
-                  autocomplete="off"
-                  value="11:30"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option6">11:30 - 12:00</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option7"
-                  autocomplete="off"
-                  value="12:00"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option7">12:00 - 12:30</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option8"
-                  autocomplete="off"
-                  value="12:30"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option8">12:30 - 13:00</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option9"
-                  autocomplete="off"
-                  value="13:00"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option9">13:00 - 13:30</label>
-
-                <input type="radio"
-                  class="btn-check"
-                  name="appointmentTime"
-                  id="option10"
-                  autocomplete="off"
-                  value="13:30"
-                  disabled />
-                <label class="btn btn-outline-primary"
-                  for="option10">13:30 - 14:00</label>
-              </div>
-            </div>
-          </div>
-        </form>
+        <%- include ('components/appointmentBookingForm'); -%>
         <% } %>
       </div>
 
     </div>
   </div>
   <% } %>
+
+  <!-- Main Content-->
+  <% if(!driver){ %>
+  <div class="container px-4 px-lg-5 mb-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <%- include ('components/newDriverForm'); -%>
+        <script>
+          document.addEventListener( 'DOMContentLoaded', () => {
+            const formEle = document.getElementById( 'newDriverForm' )
+            formEle.addEventListener( 'submit', () => {
+              const page = document.createElement( 'input' )
+              page.name = "page"
+              page.value = "g"
+              page.style.visibility = "hidden"
+              page.style.position = "absolute"
+              formEle.appendChild( page )
+            } )
+          } )
+        </script>
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+
   <div id="serverTime"
     style="display:none"><%= serverTime %></div>
-  <div class="custom-alerts">
-    <!-- Validation Errors -->
-    <% if( errors != null && errors.length > 0 ) { %>
-    <% for( var i = 0; i < errors.length; i++ ) { %>
-    <div class="custom-alert-red">
-      <span class="closebtn"
-        onclick="this.parentElement.style.display='none';">&times;</span>
-      <strong>Server:</strong> <%= errors[i] %>
-    </div>
-    <% } %>
-    <% } %>
-    <!-- Server Messages -->
-    <% if( serverMsgs != null && serverMsgs.length > 0 ) { %>
-    <% for( var i = 0; i < serverMsgs.length; i++ ) { %>
-    <div class="custom-alert-yellow">
-      <span class="closebtn"
-        onclick="this.parentElement.style.display='none';">&times;</span>
-      <strong>Server:</strong> <%= serverMsgs[i] %>
-    </div>
-    <% } %>
-    <% } %>
-  </div>
+
+  <%- include('../components/custom-alerts.ejs'); -%>
   <%- include ('../layouts/footer.ejs'); -%>
   <%- include ('../layouts/scripts.ejs'); -%>
   <script src="/js/activate-btn.js"></script>
-  <% if( !appointmentDetail ) { %>
+  <% if( !appointmentDetail && driver ) { %>
   <!-- datepicker setup requires input element with server time as value -->
   <script src="/js/datepicker-init.js"></script>
   <script>

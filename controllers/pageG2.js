@@ -21,10 +21,7 @@ module.exports = async function readDriverDetails( req, res ) {
           serverTime: serverTime,
           appointmentDetail: null,
           appointmentType: null,
-          testResult: {
-            testResult: driverObj.testResult,
-            examinerComment: driverObj.examinerComment
-          }
+          testResult: null
         } )
       } else {
         bcrypt.compare( "_defaultinputCarLicenceNumber", driverObj.carLicenceNumber, ( err, same ) => {
@@ -49,12 +46,11 @@ module.exports = async function readDriverDetails( req, res ) {
             return res.render( "driver/g2_page", {
               driver: driverObj,
               errors: req.flash( 'validationErrors' ),
-              serverMsgs: data ? null : msgWhenAppointmentSlotTaken ? [ msgWhenAppointmentSlotTaken ] : [ "Driver found. You can update the details" ],
+              serverMsgs: data ? null : msgWhenAppointmentSlotTaken ? [ msgWhenAppointmentSlotTaken ] : null,
               data: data,
               serverTime: serverTime,
               appointmentDetail: driverObj.appointmentID,
               appointmentType: driverObj.appointmentType,
-
               testResult: {
                 testResult: driverObj.testResult,
                 examinerComment: driverObj.examinerComment

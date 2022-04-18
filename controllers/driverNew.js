@@ -26,19 +26,18 @@ module.exports = async function createDriverDetails( req, res ) {
   g2Driver.image1 = image1 ? "/img/" + image1.name : null
   g2Driver.image2 = image2 ? "/img/" + image2.name : null
 
-
   Driver.findOneAndUpdate( { userID: req.session.userId }, g2Driver, {
     new: true,
   }, ( err, driver ) => {
     if( !err ) {
       req.flash( 'serverMsgs', [ "New driver created" ] )
-      res.redirect( "/drivers/dashboard-page" )
+      res.redirect( `/drivers/${ req.body.page }-page` )
     } else {
       req.flash( 'validationErrors', err.errors
         ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
         : [ "Unable to create new driver" ] )
       req.flash( 'data', req.body )
-      res.redirect( '/drivers/g2-page' )
+      res.redirect( `/drivers/${ req.body.page }-page` )
     }
   } )
 }

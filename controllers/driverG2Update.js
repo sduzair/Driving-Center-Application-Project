@@ -16,18 +16,21 @@ module.exports = async function updateDriverDetails( req, res ) {
   }
   Driver.findOneAndUpdate( { userID: req.body.userID }, update, {
     new: true,
-  }, ( err ) => {
-    if( err ) {
-      req.flash( 'validationErrors', err.errors
-        ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
-        : [ "Unable to update driver details" ] )
-      req.flash( 'data', req.body )
-      res.redirect( '/drivers/g2-page' )
-    }
-    else {
-      req.flash( 'serverMsgs', [ 'Update successful' ] )
-      res.redirect( "/drivers/dashboard-page" )
-    }
   } )
+    .populate( 'userID' )
+    .exec( ( err, driverObj ) => {
+      console.log( driverObj )
+      if( err ) {
+        req.flash( 'validationErrors', err.errors
+          ? Object.keys( err.errors ).map( key => err.errors[ key ].message )
+          : [ "Unable to update driver details" ] )
+        req.flash( 'data', req.body )
+        res.redirect( '/drivers/g2-page' )
+      }
+      else {
+        req.flash( 'serverMsgs', [ 'Update successful' ] )
+        res.redirect( "/drivers/g2-page" )
+      }
+    } )
 
 }
