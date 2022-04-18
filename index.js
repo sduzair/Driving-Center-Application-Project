@@ -143,6 +143,8 @@ app.get( "/examiners/fetchAppointments/:filterType", /*examinerAuthentication,*/
 
 app.post( "/examiners/update/driver/feedback", /*examinerAuthentication,*/driverFeedbackUpdate )
 
+app.get( "/admins/test-results-page", require( "./controllers/pageTestResults" ) )
+
 
 
 app.use( ( req, res ) => res.render( 'notfound' ) )
