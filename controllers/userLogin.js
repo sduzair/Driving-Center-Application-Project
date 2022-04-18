@@ -28,7 +28,7 @@ module.exports = function userLogin( req, res ) {
                 req.flash( 'serverMsgs', [ "Welcome to the driver dashboard" ] )
                 res.redirect( "/drivers/dashboard-page" )
               } else if( user.userType === "Examiner" ) {
-                req.flash( 'serverMsgs', [ "Welcome to the driver dashboard" ] )
+                req.flash( 'serverMsgs', [ "Welcome to the examiner dashboard" ] )
                 res.redirect( '/examiners/dashboard' )
               } else if( user.userType === "Admin" ) {
                 req.flash( 'serverMsgs', [ "Welcome to the admin dashboard" ] )
