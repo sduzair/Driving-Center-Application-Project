@@ -138,11 +138,11 @@ app.post( "/drivers/bookAppointment", driverAuthentication, driverBookAppointmen
 
 app.get( "/examiners/dashboard", examinerAuthentication, pageExaminerDashboard )
 
-app.get( "/examiners/appointments-page", /*examinerAuthentication,*/ require( "./controllers/pageAppointments" ) )
+app.get( "/examiners/appointments-page", examinerAuthentication, require( "./controllers/pageAppointments" ) )
 
-app.get( "/examiners/fetchAppointments/:filterType", /*examinerAuthentication,*/ require( "./controllers/examinerFetchByAptType" ) )
+app.get( "/examiners/fetchAppointments/:filterType", examinerAuthentication, require( "./controllers/examinerFetchByAptType" ) )
 
-app.post( "/examiners/update/driver/feedback", /*examinerAuthentication,*/ driverFeedbackUpdate )
+app.post( "/examiners/update/driver/feedback", examinerAuthentication, driverFeedbackUpdate )
 
 
 
