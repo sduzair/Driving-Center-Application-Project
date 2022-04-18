@@ -1,5 +1,3 @@
-## https://intense-mountain-37288.herokuapp.com/
-
 # Driving-Licence-Application
 
 Validation Checks:
