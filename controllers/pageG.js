@@ -19,7 +19,8 @@ module.exports = async function readDriverDetails( req, res ) {
           serverMsgs: null,
           serverTime: null,
           appointmentDetail: null,
-          appointmentType: null
+          appointmentType: null,
+          testResult: null
         } )
       } else {
         bcrypt.compare( "_defaultinputCarLicenceNumber", driverObj.carLicenceNumber, ( err, same ) => {
@@ -33,7 +34,11 @@ module.exports = async function readDriverDetails( req, res ) {
               serverMsgs: [ "Driver found." ],
               serverTime: serverTime,
               appointmentDetail: driverObj.appointmentID,
-              appointmentType: driverObj.appointmentType
+              appointmentType: driverObj.appointmentType,
+              testResult: {
+                testResult: driverObj.testResult,
+                examinerComment: driverObj.examinerComment
+              }
             } )
           }
         } )

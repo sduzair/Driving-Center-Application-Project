@@ -12741,3 +12741,67 @@ section {
   display: table;
   content: " ";
 }
+
+/* G2/G Pass/Fail */
+div.resPassDisplay {
+  border: 3px solid --bs-green;
+}
+
+div.resFailDisplay {
+  border: 3px solid --bs-red;
+}
+
+.datetime {
+  color: #fff;
+  background: #10101E;
+  font-family: "Segoe UI", sans-serif;
+  width: 340px;
+  padding: 15px 10px;
+  border: 3px solid #2E94E3;
+  border-radius: 5px;
+  /* -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255, 255, 255, 0.1)); */
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+}
+
+.datetime:hover {
+  background: #2E94E3;
+  box-shadow: 0 0 30px #2E94E3;
+}
+
+.datetime2 {
+  color: #fff;
+  background: #10101E;
+  font-family: "Segoe UI", sans-serif;
+  width: 340px;
+  padding: 15px 10px;
+  border: 3px solid #2E94E3;
+  border-radius: 5px;
+  /* -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255, 255, 255, 0.1)); */
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+}
+
+.datetime2:hover {
+  background: green;
+  box-shadow: 0 0 30px green;
+}
+
+.datetime3 {
+  color: #fff;
+  background: #10101E;
+  font-family: "Segoe UI", sans-serif;
+  width: 340px;
+  padding: 15px 10px;
+  border: 3px solid #2E94E3;
+  border-radius: 5px;
+  /* -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255, 255, 255, 0.1)); */
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+}
+
+
+.datetime3:hover {
+  background: --bs-red;
+  box-shadow: 0 0 30px --bs-red;
+}

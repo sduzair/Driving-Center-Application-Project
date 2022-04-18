@@ -20,7 +20,11 @@ module.exports = async function readDriverDetails( req, res ) {
           data: null,
           serverTime: serverTime,
           appointmentDetail: null,
-          appointmentType: null
+          appointmentType: null,
+          testResult: {
+            testResult: driverObj.testResult,
+            examinerComment: driverObj.examinerComment
+          }
         } )
       } else {
         bcrypt.compare( "_defaultinputCarLicenceNumber", driverObj.carLicenceNumber, ( err, same ) => {
@@ -33,7 +37,9 @@ module.exports = async function readDriverDetails( req, res ) {
               data: data,
               serverTime: serverTime,
               appointmentDetail: null,
-              appointmentType: null
+              appointmentType: null,
+
+              testResult: null
             } )
           } else {
             const data = req.flash( 'data' )[ 0 ]
@@ -47,7 +53,12 @@ module.exports = async function readDriverDetails( req, res ) {
               data: data,
               serverTime: serverTime,
               appointmentDetail: driverObj.appointmentID,
-              appointmentType: driverObj.appointmentType
+              appointmentType: driverObj.appointmentType,
+
+              testResult: {
+                testResult: driverObj.testResult,
+                examinerComment: driverObj.examinerComment
+              }
             } )
           }
         } )

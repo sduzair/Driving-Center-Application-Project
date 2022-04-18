@@ -17,8 +17,8 @@
       <div class="row gx-6 gx-lg-8 justify-content-center">
         <div class="col-md-10 col-lg-10 col-xl-10">
           <div class="site-heading">
-            <h1>Appointments</h1>
-            <span class="subheading">View appointment details of drivers</span>
+            <h1>Results</h1>
+            <span class="subheading">View test results details of drivers who have completed their test</span>
           </div>
         </div>
       </div>
@@ -55,33 +55,16 @@
 
                     </div>
                     <div class="col">
-                      <p class="row">Time:</p>
-                      <p class="row mx-1 small-font"><mark><%- driversObj[i].appointmentID.appointmentTime %></mark></p>
+                      <p class="row">Licence no:</p>
+                      <p class="row mx-1 small-font"><mark><%- driversObj[i].carLicenceNumber %></mark></p>
                     </div>
                     <div class="col">
-                      <p class="row">Date:</p>
-                      <p class="row mx-1 small-font"><mark><%- driversObj[i].appointmentID.appointmentDate %></mark></p>
-                    </div>
-                    <div class="col">
-                      <p class="row">Car Make:</p>
-                      <p class="row mx-1 small-font"><mark><%- driversObj[i].carMake %></mark></p>
-
-                    </div>
-                    <div class="col">
-                      <p class="row">Plate Number:</p>
-                      <p class="row mx-1 small-font"><mark><%- driversObj[i].carPlatNumber %></mark></p>
-
+                      <p class="row">Result:</p>
+                      <p class="row mx-1 small-font"><mark
+                          class="<%= driversObj[i].testResult ? 'bg-success' : 'bg-danger color-white' %> bg-gradient"><%- driversObj[i].testResult ? 'Pass' : 'Fail'%></mark>
+                      </p>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="row justify-content-center justify-content-sm-end m-auto">
-                <div class="col-4 col-sm-4 justify-content-center ">
-                  <button class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#gradeModel"
-                    driverID="<%- driversObj[i]._id %>"
-                    driverName="<%- driversObj[i].firstName %> <%- driversObj[i].lastName %>">Grade</button>
                 </div>
               </div>
             </div>

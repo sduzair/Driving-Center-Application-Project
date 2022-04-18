@@ -6,7 +6,6 @@ module.exports = function( req, res ) {
         examinerComment: examinerComment,
         testResult: testResult
     }
-    console.log( req.body )
     Driver.findOneAndUpdate( { _id: _id }, update, {
         new: true,
     }, ( err, driver ) => {
