@@ -5,10 +5,20 @@
       id="navHeading"
       href="/"
       data-aos="fade-right">
-      <img src="/assets/logo/logo_ekj6vu_c_scale,w_1400.png"
+      <picture>
+        <source media="(min-width:768px)"
+          srcset="/assets/logo/logo_ekj6vu_c_scale,w_1400.png 1400w"
+          sizes="300px">
+        <source media="(min-width:0px)"
+          srcset="/assets/logo/logo_ekj6vu_c_scale,w_1400.png 1400w"
+          sizes="200px"
+          src="/assets/logo/logo_ekj6vu_c_scale,w_1400.png">
+        <img src="/assets/logo/logo_ekj6vu_c_scale,w_1400.png">
+      </picture>
+      <!-- <img src="/assets/logo/logo_ekj6vu_c_scale,w_1400.png"
         alt=""
         width="300"
-        height="auto">
+        height="auto"> -->
     </a>
 
     <button class="navbar-toggler"
