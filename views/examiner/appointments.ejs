@@ -190,10 +190,10 @@
             aria-label="Close"></button>
         </div>
 
-        <form id="formTestResult"
-          action="/examiners/update/driver/feedback"
-          method="post">
-          <div class="modal-body">
+        <div class="modal-body">
+          <form id="formTestResult"
+            action="/examiners/update/driver/feedback"
+            method="post">
             <div class="mb-3">
               <div class="btn-group"
                 role="group"
@@ -204,8 +204,7 @@
                   name="testResult"
                   value="G2"
                   id="pass"
-                  autocomplete="off"
-                  required>
+                  autocomplete="off">
                 <label class="btn btn-outline-success"
                   for="pass">Pass</label>
 
@@ -226,17 +225,11 @@
                 id="message-text"
                 rows="9"></textarea>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal">Close</button>
             <button type="submit"
-              onclick="submitFormTestResult()"
               class="btn btn-primary">Send message</button>
 
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -253,6 +246,15 @@
         var button = event.relatedTarget
         // Extract info from attributes
         var driverID = button.getAttribute( 'driverID' )
+
+        var element = document.createElement( "input" )
+
+        //Assign different attributes to the element.
+        element.setAttribute( "value", driverID )
+        element.setAttribute( "name", "userID" )
+
+        document.getElementById( "formTestResult" ).appendChild( element )
+
         var driverName = button.getAttribute( 'driverName' )
         // Update the modal's content.
         var modalTitle = gradeModel.querySelector( '.modal-title' )
@@ -264,6 +266,7 @@
   <script>
     // test result submit form
     function submitFormTestResult() {
+      console.log( document.getElementById( "formTestResult" ).values() )
       document.getElementById( "formTestResult" ).submit()
     }
   </script>
