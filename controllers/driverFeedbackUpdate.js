@@ -5,8 +5,9 @@ module.exports = function( req, res ) {
     const { _id, examinerComment, testResult } = req.body
     const update = {
         examinerComment: examinerComment,
-        testResult: testResult ? testResult : null      // *<<<<<<<<<<<<<SO WE DO THIS
+        testResult: testResult    // *<<<<<<<<<<<<<SO WE DO THIS
     }
+
     Driver.findOneAndUpdate( { _id: _id }, update,
         { new: true },
         ( err, driver ) => {

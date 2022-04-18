@@ -90,13 +90,6 @@ const DriverSchema = new mongoose.Schema( {
   },
   testResult: {
     type: Boolean,
-    default: null,
-    validate: {
-      validator: function( v ) {
-        return v ? true : false
-      },
-      message: 'Please provide examiner result'
-    },
   }
 } )
 
