@@ -157,7 +157,7 @@
                   <button class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#gradeModel"
-                    driverID="<%- driversObj[i].userID %>"
+                    driverID="<%- driversObj[i]._id %>"
                     driverName="<%- driversObj[i].firstName %> <%- driversObj[i].lastName %>">Grade</button>
                 </div>
               </div>
@@ -202,7 +202,7 @@
                 <input type="radio"
                   class="btn-check"
                   name="testResult"
-                  value="G2"
+                  value="true"
                   id="pass"
                   autocomplete="off">
                 <label class="btn btn-outline-success"
@@ -211,7 +211,7 @@
                 <input type="radio"
                   class="btn-check"
                   name="testResult"
-                  value="G"
+                  value="false"
                   id="fail"
                   autocomplete="off">
                 <label class="btn btn-outline-danger"
@@ -223,6 +223,7 @@
                 class="col-form-label">Message:</label>
               <textarea class="form-control"
                 id="message-text"
+                name="examinerComment"
                 rows="9"></textarea>
             </div>
             <button type="submit"
@@ -251,7 +252,7 @@
 
         //Assign different attributes to the element.
         element.setAttribute( "value", driverID )
-        element.setAttribute( "name", "userID" )
+        element.setAttribute( "name", "_id" )
 
         document.getElementById( "formTestResult" ).appendChild( element )
 
