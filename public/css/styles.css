@@ -20,7 +20,7 @@ nav#mainNav {
 
 .masthead-driver-login-background {
   background-image: url("/assets/img/ivan-aleksic-PDRFeeDniCk-unsplash.jpg");
-  height: 80vh;
+  height: 70vmin;
   width: auto;
   background-repeat: round;
   margin-bottom: 3rem;
@@ -28,7 +28,7 @@ nav#mainNav {
 
 .masthead-driver-g-background {
   background-image: url("/assets/img/honda-brio-gf8792f10d_1280.jpg");
-  height: 80vh;
+  height: 80vmin;
   width: auto;
   background-repeat: round;
   margin-bottom: 3rem;
@@ -36,7 +36,7 @@ nav#mainNav {
 
 .masthead-driver-g2-background {
   background-image: url("/assets/img/orkun-azap-_c7haaSAcIg-unsplash.jpg");
-  height: 80vh;
+  height: 80vmin;
   width: auto;
   background-repeat: round;
   margin-bottom: 3rem;
@@ -44,7 +44,7 @@ nav#mainNav {
 
 .masthead-driver-background {
   background-image: url("/assets/img/traffic-cone-ge88f59500_1280.jpg");
-  height: 80vh;
+  height: 80vmin;
   width: auto;
   background-repeat: round;
   margin-bottom: 3rem;
@@ -52,7 +52,7 @@ nav#mainNav {
 
 .masthead-home-background {
   background-image: url("/assets/img/driving-school-g39b456a73_1280.jpg");
-  height: 80vh;
+  height: 80vmin;
   width: auto;
   background-repeat: round;
   margin-bottom: 3rem;
@@ -12134,13 +12134,12 @@ footer {
 header.masthead {
   position: relative;
   margin-bottom: 3rem;
-  padding-top: calc(8rem + 57px);
+  padding-top: 11rem;
   padding-bottom: 8rem;
   background: no-repeat center center;
   background-color: #6c757d;
   background-size: cover;
   background-attachment: scroll;
-  height: 85vh;
 }
 
 header.masthead:before {
@@ -12333,7 +12332,7 @@ button.btn.btn-primary {
 
 .masthead-pagenotfound {
   background-image: url("/assets/img/error-g953cd1874_1920.jpg");
-  height: 80vh;
+  height: 80vmin;
   width: auto;
   background-repeat: round;
   margin-bottom: 3rem;
@@ -12405,7 +12404,7 @@ button.btn.btn-primary {
 .calendar-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 368px 1fr;
+  /* grid-template-rows: 368px 1fr; */
   text-align: center;
   grid-gap: 10px;
   grid-row-gap: 35px;
@@ -12413,26 +12412,45 @@ button.btn.btn-primary {
 
 .calendar-item {
   grid-column: 1 / 3;
-  grid-row: 1 / 2;
+  /* grid-row: 1 / 2; */
   margin: auto;
 }
 
 .btn-appointment-add-item {
   grid-column: 2 / 4;
-  grid-row: 2 / 3;
+  /* grid-row: 2 / 3; */
 }
 
 .list-added-appointment-item {
   grid-column: 4 / 5;
-  grid-row: 1 / 2;
+  /* grid-row: 1 / 2; */
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   overflow: auto;
 }
 
 .list-appointment-slots-item {
   grid-column: 3 / 5;
-  grid-row: 1 / 2;
+  /* grid-row: 1 / 2; */
   overflow: auto;
+  }
+  
+  @media screen and (max-width: 576px) {
+    .calendar-item {
+      grid-column: 1 / 5;
+    }
+  
+    .list-added-appointment-item {
+      grid-column: 1 / 5;
+      /* grid-row: 1 / 2; */
+      box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      overflow: auto;
+    }
+  
+    .list-appointment-slots-item {
+      grid-column: 1 / 5;
+      /* grid-row: 1 / 2; */
+      overflow: auto;
+  }
 }
 
 .btn-confirm-appointments-item {
@@ -12446,6 +12464,8 @@ button.btn.btn-primary {
   grid-template-rows: repeat(10, 1fr);
   justify-content: center;
   gap: 5px;
+  height: 15em;
+  overflow: auto;
 }
 
 .fill-available {
@@ -12805,3 +12825,34 @@ div.resFailDisplay {
   background: --bs-red;
   box-shadow: 0 0 30px --bs-red;
 }
+
+/* typography */
+
+html {
+  font-size: 0.8rem;
+}
+
+/* 
+@media (max-width:576px) {
+  html {
+    font-size: 0.5rem;
+  }
+}
+
+@media (min-width:576px) {
+  html {
+    font-size: 0.6rem;
+  }
+}
+
+@media (min-width:768px) {
+  html {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width:992px) {
+  html {
+    font-size: 0.8rem;
+  }
+} */
