@@ -146,6 +146,29 @@ that only login User with UserType= Driver can access this page
     - Now if isTimeSlotAvailable is false you don’t show them on G2_page, It means that time slot is already booked
     Summary: You allow the admin user to enter appointment time slot, later display those time slots on Driver’s  and driver can select those and book appointment time slot
 
+## Driving Tests
+  - Start updating functionality, add anything missing from the previous requirements
+  - Please put more efforts in having all previous requirements done 
+  - Now modify G page so that user can pick the time slot and book an appointment, 
+  - Add Examiner side of view in the application 
+  - Modify the Login UI, so that now from drop down user can select Examiner as well
+  - Add newer middleware so that newer view can only be accessed by Examiner only
+  - If you signup as driver you can see G2_page, G_page
+  - If you signup as examiner you can see Examiner tab 
+  - If you signup as Admin you can see Appointment tab
+  - On the examiner page you can see the list of appointment or the driver ready for the drive test
+  - Also, Examiner may want to filter data to see only people looking to G2 test or G test
+  - For this to work, again you need to modify User collection, add one more field TestType
+  - If user adds data from G2_page => TestType = “G2”
+  - If user adds data from G_page => TestType = “G”
+  - Examiner pick one and it will display the details of the driver 
+  - Display limited information about Driver ie (Name, Car details etc)
+  - Once driver is selected, Examiner may add comment about the Drive Test (At this point you may assume that Examiner took the drive test and offer comment etc)
+  - Also, Examiner could be able to mark Driver as Pass/Fail (Boolean variable to check if Driver passed the test or not)
+  - For this project, you need to modify User Model to hold TestType (G2 or G), Comment, Pass/Fail data
+  - Now you again modify the Admin view so that Admin can list pass/fail candidates so that he can issue order to create Driver License to external vendor. (You don’t need to worry about vendor part). Just add functionality so that Admin can list Pass/Fail candidates
+  - Now login with the same Driver whose DriveTest completed recently, and verify the comment added by Examiner and check the status PASS/FAIL
+
 ## Mongoose Validation Checks:
   - Signup
     - Same password check 
